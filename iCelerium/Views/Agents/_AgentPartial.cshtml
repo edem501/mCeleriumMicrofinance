@@ -1,0 +1,57 @@
+﻿@model PagedList.IPagedList<iCelerium.Models.Commerciaux>
+@using PagedList.Mvc;
+
+<hr />
+
+@Html.ActionLink("Ajouter Nouveau", "Create", null, new { @class = "btn btn-primary" })
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().AgentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().AgentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().AgentTel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().AgentActif)
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgentTel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AgentActif)
+                </td>
+                <td>
+                    @Html.ActionLink("Editer", "Edit", new { id = item.Id }, new { @class = "btn btn-info" }) @*|
+                        @Html.ActionLink("Detailler", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Suprimer", "Delete", new { id = item.Id })*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div style="text-align:right;">
+    @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+
+    @Html.PagedListPager(Model, page => Url.Action("Simple", new { page, currentFilter = ViewBag.CurrentFilter }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+
+</div>

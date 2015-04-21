@@ -1,0 +1,21 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+<h3><i class="fa fa-exclamation-triangle "></i> Error.</h3>
+
+<hr>
+<div class="row">
+    
+        <div class="panel panel-danger ">
+            <div class="alert-danger">
+                <h2>
+                    <p>@Model.ControllerName.ToString()</p>
+                    <p>@Model.ActionName.ToString()</p>
+                    <p>@Model.Exception.Message.ToString()</p>
+                </h2>
+            </div>
+    </div>
+</div>
+

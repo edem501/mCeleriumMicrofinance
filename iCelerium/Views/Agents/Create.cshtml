@@ -1,0 +1,62 @@
+﻿@using iCelerium.Models.BodyClasses;
+@model iCelerium.Models.BodyClasses.CreateAgentViewModels
+@{
+    ViewBag.Title = @iCelerium.Views.Strings.CreateNew;
+}
+<h3><i class="fa fa-user"></i> @ViewBag.Title</h3>
+
+<hr/>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+          
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AgentName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.AgentName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AgentName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AgentTel, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.AgentTel, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AgentTel)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AgentActif, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AgentActif, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AgentActif)
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="input-group col-md-offset-2 col-md-6">
+                    <span class="input-group-addon"><i class="fa fa-globe bigger-110"></i></span>
+                    @Html.DropDownList("Zones", null, "Zones...", new { @class = "form-control dropdown" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@iCelerium.Views.Strings.Save" class="btn btn-success" />
+                    @Html.ActionLink(@iCelerium.Views.Strings.Cancel, "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        </div>
+    }
+
+   
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -1,0 +1,48 @@
+﻿@using iCelerium.Models;
+@*@model IEnumerable<AspNetRole>*@
+@{
+    ViewBag.Title = "Roles";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript" language="javascript">
+    function ClearResults() {
+        $("#AgentPartial").empty;
+    }
+</script>
+
+
+
+<div class="row">
+    
+        @using (Ajax.BeginForm("_PartialAccList", "Account", new AjaxOptions
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "AccountPartial",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "Spinner",
+    OnBegin = "ClearResults"
+
+}))
+        {
+            <h3><i class="fa fa-users"></i>Gestion des roles</h3>
+            <hr />
+            <div class="form-group">
+
+                <div class="input-group ">
+                    <span class="input-group-addon"><i class="fa fa-user bigger-110"></i></span>
+                    @Html.DropDownList("AppRoles", null, "Roles", new { @class = "form-control dropdown" })
+                    <input type="submit" value="Go" class="btn btn-sm" />
+                </div>
+            </div>
+
+        }
+        <div id="Spinner" style="display:none;">
+            <img src="~/Images/spiffygif.gif" />
+        </div>
+    
+        <div id="AccountPartial" class="row">
+
+        </div>
+       
+ </div>

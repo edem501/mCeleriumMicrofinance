@@ -1,0 +1,50 @@
+﻿@model iCelerium.Models.Commerciaux
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Commerciaux</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AgentId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgentId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgentActif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgentActif)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgentTel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgentTel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

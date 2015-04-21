@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Reports";
+}
+
+<div class="jumbotron">
+    <h2>@ViewBag.Title</h2>
+
+</div>
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+
+            <div class="col-md-10">
+                @Html.DropDownList("reportModel", null, new { @class = "form-control" })
+                <input type="submit" value="Go" class="btn btn-success" />
+            </div>
+        </div>
+    }
+
+</div>

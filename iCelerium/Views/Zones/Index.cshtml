@@ -1,0 +1,71 @@
+﻿@using iCelerium.Models.BodyClasses
+@model List<ZonesModel>
+@{
+    ViewBag.Title = iCelerium.Views.Strings.ZoneList;
+
+}
+
+
+<h3><i class="fa fa-globe"></i> @ViewBag.Title</h3>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-4">
+            <div class="input-group col-md-1">
+                @Html.ActionLink(@iCelerium.Views.Strings.CreateNew, "Create", null, new { @class = "form-control btn btn-success" })
+                <span class="input-group-addon"><i class="fa fa-plus-circle"></i></span>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+<br/>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            
+
+            <table class="table table-striped">
+                <thead style=" font-weight:bold" class="alert-info">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().ZoneID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().ZoneName)
+                        </th>
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ZonesModel item in Model)
+                    {
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ZoneID)
+                            </td>
+                            <td style="text-transform:uppercase">
+                                @Html.DisplayFor(modelItem => item.ZoneName)
+                            </td>
+
+                            <td>
+                                @*@Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                                    @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id=item.id })*@
+
+                                <a href='@Url.Action("Edit", "Zones", new { Id = item.Id })'> <i class="fa fa-edit fa-fw fa-2x"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+
+        </div>
+    </div>
+</div>

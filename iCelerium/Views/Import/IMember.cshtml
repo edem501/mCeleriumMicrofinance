@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Importer Membres";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>
+    <i class="fa fa-file-excel-o"></i> @ViewBag.Title
+</h3>
+
+<hr>
+@using (Html.BeginForm("Member", "Import", FormMethod.Post, new { enctype = "multipart/form-data"}))
+{
+    <table>
+        <tr>
+            <td></td>
+            <td><input type="file" id="FileUpload1" name="FileUpload1" class="btn btn-default"/></td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td>@Html.DropDownList("Agents", null, @iCelerium.Views.Strings.Agents, new { @class = "form-control dropdown" })</td>
+
+        </tr>
+        <tr>
+            
+            <td></td>
+            <td><input type="submit" id="Submit" name="Submit" value="Importer" class="btn btn-primary"/></td>
+        </tr>
+    </table>
+}

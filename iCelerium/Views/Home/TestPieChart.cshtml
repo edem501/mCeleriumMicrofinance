@@ -1,0 +1,26 @@
+﻿@using iCelerium.Models;
+@model IEnumerable<spTransPie_Result>
+@{
+    ViewBag.Title = "TestPieChart";
+}
+
+<h2>TestPieChart</h2>
+<table>
+    <thead>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.ZoneName)</td>
+            <td>@Html.DisplayNameFor(model => model.Total)</td>
+        </tr>
+    </thead>
+    <tbody>
+      @foreach (spTransPie_Result item in Model.ToList())
+{
+
+    <tr>
+        <td>@Html.DisplayFor(modelitem => item.ZoneName)</td>
+        <td>@Html.DisplayFor(modelitem => item.Total)</td>
+    </tr>
+}
+    </tbody>
+</table>
+

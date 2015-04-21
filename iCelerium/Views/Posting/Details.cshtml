@@ -1,0 +1,92 @@
+﻿@model iCelerium.Models.PostingDetails
+
+@{
+    ViewBag.Title = Model.agentName;
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui.unobtrusive-2.2.0.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+}
+<h3>
+
+
+
+    <i class="fa fa-tasks"></i> Postings 
+   
+</h3>
+
+<hr>
+@{
+    string col;
+    bool visible;
+
+    if (Model.Live.Payable == Model.Upload.Payable)
+    {
+        col = "panel-success";
+        visible = true;
+
+    }
+    else
+    {
+        col = "panel-danger";
+        visible = false;
+    }
+}
+@using (Html.BeginForm("Details", "Posting", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel @col ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Live Transactions non Poste
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @Html.Partial("_Live", Model.Live)
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel @col ">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Upload Transactions non Poste
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @Html.Partial("_Uploaded", Model.Upload)
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4" style="text-align:right">
+
+            @if (visible == true)
+            {
+                <input type="submit" value="Valider transactions" class="btn btn-success" />
+                TempData["Mod"] = Model;
+            }
+            else
+            {
+                @*<input type="button" value="Reajuster" class="btn btn-danger" />*@
+                @Html.ActionLink("Reajuster", "Adjust", new { sDate = ViewBag.sDate, agentId = ViewBag.aID }, new { @class = "btn btn-danger" })
+                TempData["Mod"] = Model;
+            }
+            
+            @Html.ActionLink("Retourner", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+
+    </div>
+}

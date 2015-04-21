@@ -1,0 +1,27 @@
+﻿<link href="~/Content/404CSS.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Http 404 NotFound";
+    //Layout = null;
+}
+
+<article>
+    <h1>Ooops! 404</h1>
+    <hr />
+    <h2>Ceci n'est pas la page que vous voulez visiter, n'est-ce pas?</h2>
+    <hr />
+    <p id="rr">
+        <center>
+            Votre page n'a pas pu être trouvé. Vous avez peut-être suivi un lien incorrect,
+            ou tout simplement une erreur de frappe de l'URL.Il est également possible que nous avons renommé, déplacé ou effacé le contenu.
+            <br /><br />Aimeriez-vous nous aider à améliorer mCelerium? Il suffit de contacter Albatrossarl.<br /><br />Merci
+        </center>
+    </p>
+
+    <br class="clear" />
+
+</article>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+}

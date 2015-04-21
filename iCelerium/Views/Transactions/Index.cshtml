@@ -1,0 +1,77 @@
+﻿@model PagedList.IPagedList<TransactionsViewModel>
+@using PagedList.Mvc;
+@using iCelerium.Models.BodyClasses;
+
+@{
+    ViewBag.Title = "Transactions";
+}
+<link href="~/Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+   <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+}
+
+
+<h3><i class="fa fa-tasks"></i> Transactions<span class="badge pull-right">@Model.TotalItemCount.ToString()</span></h3>
+
+<hr>
+<div class="row">
+    <div class="col-md-4" >
+        
+    </div>
+    <div class="col-md-4"></div>
+        <div class="col-md-4" >
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @using (Html.BeginForm("Index", "Transactions", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            @*@Html.Label("Date Operation", null, new { @class = "date" })*@
+
+                            <div class="input-group ">
+                                <span class="input-group-addon "><i class="fa fa-calendar bigger-110"></i></span>
+                                @Html.TextBox("searchDate", null, new { @class = "form-control date-picker" })
+
+                            </div>
+                        </div>
+
+                        @*@Html.Label("Commerial", null, new { @class = "control-label" })*@
+                        <div class="form-group">
+
+                            <div class="input-group ">
+                                <span class="input-group-addon"><i class="fa fa-user bigger-110"></i></span>
+                                @Html.DropDownList("agentModel", null, @iCelerium.Views.Strings.Agents, new { @class = "form-control dropdown" })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Go" class="btn btn-success" onsubmit="@Model.PageNumber=1" />
+                        </div>
+                    }
+                </div>
+            </div>
+          
+        </div>
+
+    </div>
+
+   
+    @*<div class="input-group col-md-1">
+
+        @Html.ActionLink(@iCelerium.Views.Strings.ExportExcel, "ExportToExcel", new { searchDate = ViewBag.VBsearchDate, agentModel = ViewBag.VBagentModel }, new { @class = "form-control btn btn-primary" })
+        <span class="input-group-addon"><i class="fa fa-file-excel-o"></i></span>
+    </div>*@
+<div class="row">
+    
+            @Html.Partial("_ViewPartial")
+       
+</div>
+
+
+
+

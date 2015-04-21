@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Charts";
+}
+<link href="~/Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/jqPlot/jquery.jqplot.min.css" rel="stylesheet" />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="~/Scripts/jqPlot/jquery.jqplot.min.js"></script>
+}
+
+<div id="chartdiv" style="height:400px;width:300px; "></div>
+<input type="text" value="" id="searchDate" class="date-picker" />

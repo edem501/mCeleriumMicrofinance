@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "calendar";
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css"    />
+<link href="~/Content/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
+
+
+
+<h2>calendar</h2>
+<input type="text" class="date"/>
+<script type="text/javascript">
+    $(function () {
+        $("input:text.date").datepicker({
+            dateFormat: "dd/mm/yy"
+        });
+    });
+</script>

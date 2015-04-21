@@ -1,0 +1,1615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SMSServersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgentAssignClient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ClientId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DateAssignee" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+          <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="FullName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AuditRecords">
+          <Key>
+            <PropertyRef Name="AuditID" />
+          </Key>
+          <Property Name="AuditID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IPAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AreaAccessed" Type="varchar(max)" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="varchar" MaxLength="10" />
+          <Property Name="ClientTel" Type="varchar" MaxLength="50" />
+          <Property Name="Mise" Type="float" />
+          <Property Name="Solde" Type="float" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Sexe" Type="varchar" MaxLength="10" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ClientsUpload">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="varchar" MaxLength="10" />
+          <Property Name="ClientTel" Type="varchar" MaxLength="50" />
+          <Property Name="Mise" Type="float" />
+          <Property Name="Solde" Type="float" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Sexe" Type="varchar" MaxLength="10" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="Posted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Commerciaux">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AgentPass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AgentName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AgentActif" Type="bit" Nullable="false" />
+          <Property Name="AgentTel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZoneID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MessageIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SendTime" Type="datetime" Nullable="false" />
+          <Property Name="ReceiveTime" Type="datetime" />
+          <Property Name="MessageFrom" Type="nvarchar" MaxLength="80" />
+          <Property Name="MessageTo" Type="nvarchar" MaxLength="80" />
+          <Property Name="SMSC" Type="nvarchar" MaxLength="80" />
+          <Property Name="MessageText" Type="nvarchar(max)" />
+          <Property Name="MessageType" Type="nvarchar" MaxLength="80" />
+          <Property Name="MessagePDU" Type="nvarchar(max)" />
+          <Property Name="Gateway" Type="nvarchar" MaxLength="80" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="80" />
+          <Property Name="Processed" Type="bit" />
+        </EntityType>
+        <EntityType Name="MessageLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SendTime" Type="datetime" Nullable="false" />
+          <Property Name="ReceiveTime" Type="datetime" />
+          <Property Name="StatusCode" Type="int" />
+          <Property Name="StatusText" Type="nvarchar" MaxLength="80" />
+          <Property Name="MessageTo" Type="nvarchar" MaxLength="80" />
+          <Property Name="MessageFrom" Type="nvarchar" MaxLength="80" />
+          <Property Name="MessageText" Type="nvarchar(max)" />
+          <Property Name="MessageType" Type="nvarchar" MaxLength="80" />
+          <Property Name="MessageId" Type="nvarchar" MaxLength="80" />
+          <Property Name="ErrorCode" Type="nvarchar" MaxLength="80" />
+          <Property Name="ErrorText" Type="nvarchar" MaxLength="80" />
+          <Property Name="Gateway" Type="nvarchar" MaxLength="80" />
+          <Property Name="MessagePDU" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="80" />
+          <Property Name="UserInfo" Type="nvarchar(max)" />
+          <Property Name="Accounting" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MessageOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageTo" Type="nvarchar" MaxLength="80" />
+          <Property Name="MessageFrom" Type="nvarchar" MaxLength="80" />
+          <Property Name="MessageText" Type="nvarchar(max)" />
+          <Property Name="MessageType" Type="nvarchar" MaxLength="80" />
+          <Property Name="Gateway" Type="nvarchar" MaxLength="80" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="80" />
+          <Property Name="UserInfo" Type="nvarchar(max)" />
+          <Property Name="Priority" Type="int" />
+          <Property Name="Scheduled" Type="datetime" />
+          <Property Name="IsRead" Type="bit" Nullable="false" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostedTansactions">
+          <Key>
+            <PropertyRef Name="PostingID" />
+          </Key>
+          <Property Name="PostingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostingStamp" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="AgentInfo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Numtrans" Type="int" Nullable="false" />
+          <Property Name="SPaiments" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SCollectes" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SPayable" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SNouveauClient" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSServers.dbo.Settings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="HasManualEntry" />
+          </Key>
+          <Property Name="HasManualEntry" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TerminalAssigned">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TerminalID" Type="int" Nullable="false" />
+          <Property Name="AgentID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateAssigned" Type="datetime" Nullable="false" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Terminals">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TerminalID" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="EMEI" Type="nchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TerminalTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tester">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Variables" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TTransaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ClientId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Credit" Type="float" Nullable="false" />
+          <Property Name="Debit" Type="float" Nullable="false" />
+          <Property Name="SoldeOuverture" Type="float" Nullable="false" />
+          <Property Name="SoldeFermeture" Type="float" Nullable="false" />
+          <Property Name="Description" Type="float" Nullable="false" />
+          <Property Name="DateOperation" Type="datetime" Nullable="false" />
+          <Property Name="Posted" Type="bit" />
+        </EntityType>
+        <EntityType Name="TTransactionUpload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="varchar" MaxLength="5" />
+          <Property Name="ClientId" Type="varchar" MaxLength="10" />
+          <Property Name="Credit" Type="float" />
+          <Property Name="Debit" Type="float" />
+          <Property Name="SoldeOuverture" Type="float" />
+          <Property Name="SoldeFermeture" Type="float" />
+          <Property Name="Description" Type="float" />
+          <Property Name="DateOperation" Type="datetime" />
+          <Property Name="Posted" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="56" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsConfirmed" Type="bit" />
+          <Property Name="LastPasswordFailureDate" Type="datetime" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordChangedDate" Type="datetime" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zones">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZoneID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZoneName" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SMSServers.dbo.vTransactions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vTransactions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Nom Commercial" Type="varchar" MaxLength="50" />
+          <Property Name="Nom Client" Type="varchar" MaxLength="50" />
+          <Property Name="Solde Ouverture" Type="float" />
+          <Property Name="Debit" Type="float" />
+          <Property Name="Credit" Type="float" />
+          <Property Name="Solde Fermeture" Type="float" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="AgentId" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RoleId">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="webpages_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TerminalAssigned_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="TerminalAssigned" Type="Self.TerminalAssigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TerminalAssigned">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TerminalAssigned_Commerciaux">
+          <End Role="Commerciaux" Type="Self.Commerciaux" Multiplicity="1" />
+          <End Role="TerminalAssigned" Type="Self.TerminalAssigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commerciaux">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TerminalAssigned">
+              <PropertyRef Name="AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TerminalAssigned_Terminals">
+          <End Role="Terminals" Type="Self.Terminals" Multiplicity="1" />
+          <End Role="TerminalAssigned" Type="Self.TerminalAssigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminals">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TerminalAssigned">
+              <PropertyRef Name="TerminalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Terminals_TerminalTypes">
+          <End Role="TerminalTypes" Type="Self.TerminalTypes" Multiplicity="1" />
+          <End Role="Terminals" Type="Self.Terminals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TerminalTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Terminals">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UserId">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+          <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="webpages_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spToBePosted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="datetime" Mode="In" />
+          <Parameter Name="date2" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spToBePostedUploaded" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="datetime" Mode="In" />
+          <Parameter Name="date2" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spToBeValidated" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="datetime" Mode="In" />
+          <Parameter Name="date2" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="spTransDay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spTransDayColPay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="varchar" Mode="In" />
+          <Parameter Name="key" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spTransPie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spUpdatePosted" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="toRealign" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AgentId" Type="varchar" Mode="In" />
+          <Parameter Name="date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="Validations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="datetime" Mode="In" />
+          <Parameter Name="date2" Type="datetime" Mode="In" />
+          <Parameter Name="UserID" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="SMSServersModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgentAssignClient" EntityType="Self.AgentAssignClient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuditRecords" EntityType="Self.AuditRecords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientsUpload" EntityType="Self.ClientsUpload" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Commerciaux" EntityType="Self.Commerciaux" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MessageIn" EntityType="Self.MessageIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MessageLog" EntityType="Self.MessageLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MessageOut" EntityType="Self.MessageOut" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostedTansactions" EntityType="Self.PostedTansactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TerminalAssigned" EntityType="Self.TerminalAssigned" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Terminals" EntityType="Self.Terminals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TerminalTypes" EntityType="Self.TerminalTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tester" EntityType="Self.Tester" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TTransaction" EntityType="Self.TTransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TTransactionUpload" EntityType="Self.TTransactionUpload" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zones" EntityType="Self.Zones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Settings].[HasManualEntry] AS [HasManualEntry]
+    FROM [dbo].[Settings] AS [Settings]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vTransactions" EntityType="Self.vTransactions" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vTransactions].[Date] AS [Date], 
+    [vTransactions].[Nom Commercial] AS [Nom Commercial], 
+    [vTransactions].[Nom Client] AS [Nom Client], 
+    [vTransactions].[Solde Ouverture] AS [Solde Ouverture], 
+    [vTransactions].[Debit] AS [Debit], 
+    [vTransactions].[Credit] AS [Credit], 
+    [vTransactions].[Solde Fermeture] AS [Solde Fermeture], 
+    [vTransactions].[id] AS [id], 
+    [vTransactions].[AgentId] AS [AgentId]
+    FROM [dbo].[vTransactions] AS [vTransactions]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminalAssigned_AspNetUsers" Association="Self.FK_TerminalAssigned_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="TerminalAssigned" EntitySet="TerminalAssigned" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminalAssigned_Commerciaux" Association="Self.FK_TerminalAssigned_Commerciaux">
+            <End Role="Commerciaux" EntitySet="Commerciaux" />
+            <End Role="TerminalAssigned" EntitySet="TerminalAssigned" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminalAssigned_Terminals" Association="Self.FK_TerminalAssigned_Terminals">
+            <End Role="Terminals" EntitySet="Terminals" />
+            <End Role="TerminalAssigned" EntitySet="TerminalAssigned" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Terminals_TerminalTypes" Association="Self.FK_Terminals_TerminalTypes">
+            <End Role="TerminalTypes" EntitySet="TerminalTypes" />
+            <End Role="Terminals" EntitySet="Terminals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SMSServersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SMSServersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="SMSServersModel.C__MigrationHistory" />
+          <EntitySet Name="AgentAssignClients" EntityType="SMSServersModel.AgentAssignClient" />
+          <EntitySet Name="AspNetRoles" EntityType="SMSServersModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="SMSServersModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="SMSServersModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="SMSServersModel.AspNetUser" />
+          <EntitySet Name="AuditRecords" EntityType="SMSServersModel.AuditRecord" />
+          <EntitySet Name="Clients" EntityType="SMSServersModel.Client" />
+          <EntitySet Name="Commerciauxes" EntityType="SMSServersModel.Commerciaux" />
+          <EntitySet Name="MessageIns" EntityType="SMSServersModel.MessageIn" />
+          <EntitySet Name="MessageLogs" EntityType="SMSServersModel.MessageLog" />
+          <EntitySet Name="MessageOuts" EntityType="SMSServersModel.MessageOut" />
+          <EntitySet Name="TTransactions" EntityType="SMSServersModel.TTransaction" />
+          <EntitySet Name="TTransactionUploads" EntityType="SMSServersModel.TTransactionUpload" />
+          <EntitySet Name="UserProfiles" EntityType="SMSServersModel.UserProfile" />
+          <EntitySet Name="webpages_Membership" EntityType="SMSServersModel.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="SMSServersModel.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="SMSServersModel.webpages_Roles" />
+          <EntitySet Name="Zones" EntityType="SMSServersModel.Zone" />
+          <EntitySet Name="vTransactions" EntityType="SMSServersModel.vTransaction" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="SMSServersModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="SMSServersModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="SMSServersModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="webpages_UsersInRoles" Association="SMSServersModel.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <FunctionImport Name="spTransDay" ReturnType="Collection(SMSServersModel.spTransDay_Result)">
+          <Parameter Name="date1" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spTransDayColPay" ReturnType="Collection(SMSServersModel.spTransDayColPay_Result)">
+            <Parameter Name="date1" Mode="In" Type="String" />
+            <Parameter Name="key" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spTransPie" ReturnType="Collection(SMSServersModel.spTransPie_Result)">
+          <Parameter Name="date1" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="PostedTansactions" EntityType="SMSServersModel.PostedTansaction" />
+          <EntitySet Name="ClientsUploads" EntityType="SMSServersModel.ClientsUpload" />
+          <EntitySet Name="Testers" EntityType="SMSServersModel.Tester" />
+          <FunctionImport Name="spToBePosted" ReturnType="Collection(SMSServersModel.spToBePosted_Result)">
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spToBePostedUploaded" ReturnType="Collection(SMSServersModel.spToBePostedUploaded_Result)">
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spToBeValidated" ReturnType="Collection(SMSServersModel.spToBeValidated_Result)">
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spUpdatePosted">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="toRealign" ReturnType="Collection(SMSServersModel.toRealign_Result)">
+            <Parameter Name="AgentId" Mode="In" Type="String" />
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Validations" ReturnType="Collection(SMSServersModel.Validations_Result)">
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+            <Parameter Name="UserID" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="TerminalAssigneds" EntityType="SMSServersModel.TerminalAssigned" />
+          <EntitySet Name="Terminals" EntityType="SMSServersModel.Terminal" />
+          <EntitySet Name="TerminalTypes" EntityType="SMSServersModel.TerminalType" />
+          <AssociationSet Name="FK_TerminalAssigned_AspNetUsers" Association="SMSServersModel.FK_TerminalAssigned_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="TerminalAssigned" EntitySet="TerminalAssigneds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminalAssigned_Commerciaux" Association="SMSServersModel.FK_TerminalAssigned_Commerciaux">
+            <End Role="Commerciaux" EntitySet="Commerciauxes" />
+            <End Role="TerminalAssigned" EntitySet="TerminalAssigneds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminalAssigned_Terminals" Association="SMSServersModel.FK_TerminalAssigned_Terminals">
+            <End Role="Terminal" EntitySet="Terminals" />
+            <End Role="TerminalAssigned" EntitySet="TerminalAssigneds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Terminals_TerminalTypes" Association="SMSServersModel.FK_Terminals_TerminalTypes">
+            <End Role="TerminalType" EntitySet="TerminalTypes" />
+            <End Role="Terminal" EntitySet="Terminals" />
+          </AssociationSet>
+          <EntitySet Name="Settings" EntityType="SMSServersModel.Setting" />
+        </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AgentAssignClient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DateAssignee" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="SMSServersModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="SMSServersModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="SMSServersModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Discriminator" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="SMSServersModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="SMSServersModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="SMSServersModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <NavigationProperty Name="TerminalAssigneds" Relationship="SMSServersModel.FK_TerminalAssigned_AspNetUsers" FromRole="AspNetUser" ToRole="TerminalAssigned" />
+        </EntityType>
+        <EntityType Name="AuditRecord">
+          <Key>
+            <PropertyRef Name="AuditID" />
+          </Key>
+          <Property Name="AuditID" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IPAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AreaAccessed" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientTel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mise" Type="Double" />
+          <Property Name="Solde" Type="Double" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sexe" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Commerciaux">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AgentPass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AgentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AgentActif" Type="Boolean" Nullable="false" />
+          <Property Name="AgentTel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZoneID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TerminalAssigneds" Relationship="SMSServersModel.FK_TerminalAssigned_Commerciaux" FromRole="Commerciaux" ToRole="TerminalAssigned" />
+        </EntityType>
+        <EntityType Name="MessageIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SendTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReceiveTime" Type="DateTime" Precision="3" />
+          <Property Name="MessageFrom" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MessageTo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="SMSC" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MessageType" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MessagePDU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gateway" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Processed" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="MessageLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SendTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReceiveTime" Type="DateTime" Precision="3" />
+          <Property Name="StatusCode" Type="Int32" />
+          <Property Name="StatusText" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MessageTo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MessageFrom" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MessageType" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MessageId" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorCode" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorText" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Gateway" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MessagePDU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="UserInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Accounting" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MessageOut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageTo" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MessageFrom" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MessageType" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Gateway" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="UserInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Int32" />
+          <Property Name="Scheduled" Type="DateTime" Precision="3" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TTransaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Credit" Type="Double" Nullable="false" />
+          <Property Name="Debit" Type="Double" Nullable="false" />
+          <Property Name="SoldeOuverture" Type="Double" Nullable="false" />
+          <Property Name="SoldeFermeture" Type="Double" Nullable="false" />
+          <Property Name="Description" Type="Double" Nullable="false" />
+          <Property Name="DateOperation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Posted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TTransactionUpload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ClientId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Credit" Type="Double" />
+          <Property Name="Debit" Type="Double" />
+          <Property Name="SoldeOuverture" Type="Double" />
+          <Property Name="SoldeFermeture" Type="Double" />
+          <Property Name="Description" Type="Double" />
+          <Property Name="DateOperation" Type="DateTime" Precision="3" />
+          <Property Name="Posted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="56" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="webpages_Roles" Relationship="SMSServersModel.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+        </EntityType>
+        <EntityType Name="webpages_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="webpages_OAuthMembership">
+          <Key>
+            <PropertyRef Name="Provider" />
+            <PropertyRef Name="ProviderUserId" />
+          </Key>
+          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="webpages_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserProfiles" Relationship="SMSServersModel.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Zone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZoneID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZoneName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vTransaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Nom_Commercial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nom_Client" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Solde_Ouverture" Type="Double" />
+          <Property Name="Debit" Type="Double" />
+          <Property Name="Credit" Type="Double" />
+          <Property Name="Solde_Fermeture" Type="Double" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="AgentId" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+          <End Type="SMSServersModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SMSServersModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="SMSServersModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SMSServersModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="SMSServersModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="SMSServersModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <Association Name="webpages_UsersInRoles">
+          <End Type="SMSServersModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+          <End Type="SMSServersModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+        </Association>
+        <ComplexType Name="spTransDay_Result">
+          <Property Type="Int32" Name="Heure" Nullable="true" />
+          <Property Type="Double" Name="Total" Nullable="true" />
+          <Property Type="Double" Name="cTotal" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spTransDayColPay_Result">
+          <Property Type="Int32" Name="Heure" Nullable="true" />
+          <Property Type="Double" Name="Total" Nullable="true" />
+          <Property Type="Double" Name="cTotal" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spTransPie_Result">
+          <Property Type="String" Name="ZoneName" Nullable="true" MaxLength="150" />
+          <Property Type="Double" Name="Total" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="PostedTansaction">
+          <Key>
+            <PropertyRef Name="PostingID" />
+          </Key>
+          <Property Name="PostingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostingStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AgentInfo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Numtrans" Type="Int32" Nullable="false" />
+          <Property Name="SPaiments" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SCollectes" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SPayable" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SNouveauClient" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ClientsUpload">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ClientTel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mise" Type="Double" />
+          <Property Name="Solde" Type="Double" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Sexe" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="Posted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Tester">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Variables" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="spToBePosted_Result">
+          <Property Type="String" Name="AgentId" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="AgentName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="NTrans" Nullable="true" />
+          <Property Type="Double" Name="SPaiement" Nullable="true" />
+          <Property Type="Double" Name="SCollet" Nullable="true" />
+          <Property Type="Double" Name="SNouveauClient" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spToBePostedUploaded_Result">
+          <Property Type="String" Name="AgentId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="AgentName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="NTrans" Nullable="true" />
+          <Property Type="Double" Name="SPaiement" Nullable="true" />
+          <Property Type="Double" Name="SCollet" Nullable="true" />
+          <Property Type="Double" Name="SNouveauClient" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spToBeValidated_Result">
+          <Property Type="String" Name="AgentId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="AgentName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="NTrans" Nullable="true" />
+          <Property Type="Double" Name="SPaiement" Nullable="true" />
+          <Property Type="Double" Name="SCollet" Nullable="true" />
+          <Property Type="Double" Name="SNouveauClient" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="toRealign_Result">
+          <Property Type="String" Name="AgentId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="ClientId" Nullable="true" MaxLength="10" />
+          <Property Type="Double" Name="Credit" Nullable="true" />
+          <Property Type="Double" Name="Debit" Nullable="true" />
+          <Property Type="Double" Name="SoldeOuverture" Nullable="true" />
+          <Property Type="Double" Name="SoldeFermeture" Nullable="true" />
+          <Property Type="Double" Name="Description" Nullable="true" />
+          <Property Type="Boolean" Name="Posted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Validations_Result">
+          <Property Type="DateTime" Name="PostingStamp" Nullable="false" Precision="23" />
+          <Property Type="String" Name="FullName" Nullable="true" />
+          <Property Type="String" Name="AgentName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Numtrans" Nullable="false" />
+          <Property Type="Decimal" Name="SPaiments" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="SCollectes" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="SPayable" Nullable="false" Precision="18" Scale="2" />
+        </ComplexType>
+        <EntityType Name="TerminalAssigned">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TerminalID" Type="Int32" Nullable="false" />
+          <Property Name="AgentID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DateAssigned" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="SMSServersModel.FK_TerminalAssigned_AspNetUsers" FromRole="TerminalAssigned" ToRole="AspNetUser" />
+          <NavigationProperty Name="Commerciaux" Relationship="SMSServersModel.FK_TerminalAssigned_Commerciaux" FromRole="TerminalAssigned" ToRole="Commerciaux" />
+          <NavigationProperty Name="Terminal" Relationship="SMSServersModel.FK_TerminalAssigned_Terminals" FromRole="TerminalAssigned" ToRole="Terminal" />
+        </EntityType>
+        <EntityType Name="Terminal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TerminalID" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EMEI" Type="String" Nullable="false" MaxLength="40" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="TerminalAssigneds" Relationship="SMSServersModel.FK_TerminalAssigned_Terminals" FromRole="Terminal" ToRole="TerminalAssigned" />
+          <NavigationProperty Name="TerminalType" Relationship="SMSServersModel.FK_Terminals_TerminalTypes" FromRole="Terminal" ToRole="TerminalType" />
+        </EntityType>
+        <EntityType Name="TerminalType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Terminals" Relationship="SMSServersModel.FK_Terminals_TerminalTypes" FromRole="TerminalType" ToRole="Terminal" />
+        </EntityType>
+        <Association Name="FK_TerminalAssigned_AspNetUsers">
+          <End Type="SMSServersModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="SMSServersModel.TerminalAssigned" Role="TerminalAssigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TerminalAssigned">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TerminalAssigned_Commerciaux">
+          <End Type="SMSServersModel.Commerciaux" Role="Commerciaux" Multiplicity="1" />
+          <End Type="SMSServersModel.TerminalAssigned" Role="TerminalAssigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commerciaux">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TerminalAssigned">
+              <PropertyRef Name="AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TerminalAssigned_Terminals">
+          <End Type="SMSServersModel.Terminal" Role="Terminal" Multiplicity="1" />
+          <End Type="SMSServersModel.TerminalAssigned" Role="TerminalAssigned" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terminal">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TerminalAssigned">
+              <PropertyRef Name="TerminalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Terminals_TerminalTypes">
+          <End Type="SMSServersModel.TerminalType" Role="TerminalType" Multiplicity="1" />
+          <End Type="SMSServersModel.Terminal" Role="Terminal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TerminalType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Terminal">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="HasManualEntry" />
+          </Key>
+          <Property Name="HasManualEntry" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SMSServersModelStoreContainer" CdmEntityContainer="SMSServersEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="SMSServersModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgentAssignClients">
+            <EntityTypeMapping TypeName="SMSServersModel.AgentAssignClient">
+              <MappingFragment StoreEntitySet="AgentAssignClient">
+                <ScalarProperty Name="DateAssignee" ColumnName="DateAssignee" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="SMSServersModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="SMSServersModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="SMSServersModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="SMSServersModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditRecords">
+            <EntityTypeMapping TypeName="SMSServersModel.AuditRecord">
+              <MappingFragment StoreEntitySet="AuditRecords">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="AreaAccessed" ColumnName="AreaAccessed" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="SMSServersModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Sexe" ColumnName="Sexe" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Solde" ColumnName="Solde" />
+                <ScalarProperty Name="Mise" ColumnName="Mise" />
+                <ScalarProperty Name="ClientTel" ColumnName="ClientTel" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commerciauxes">
+            <EntityTypeMapping TypeName="SMSServersModel.Commerciaux">
+              <MappingFragment StoreEntitySet="Commerciaux">
+                <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
+                <ScalarProperty Name="AgentTel" ColumnName="AgentTel" />
+                <ScalarProperty Name="AgentActif" ColumnName="AgentActif" />
+                <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+                <ScalarProperty Name="AgentPass" ColumnName="AgentPass" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageIns">
+            <EntityTypeMapping TypeName="SMSServersModel.MessageIn">
+              <MappingFragment StoreEntitySet="MessageIn">
+                <ScalarProperty Name="Processed" ColumnName="Processed" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Gateway" ColumnName="Gateway" />
+                <ScalarProperty Name="MessagePDU" ColumnName="MessagePDU" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="SMSC" ColumnName="SMSC" />
+                <ScalarProperty Name="MessageTo" ColumnName="MessageTo" />
+                <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
+                <ScalarProperty Name="ReceiveTime" ColumnName="ReceiveTime" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageLogs">
+            <EntityTypeMapping TypeName="SMSServersModel.MessageLog">
+              <MappingFragment StoreEntitySet="MessageLog">
+                <ScalarProperty Name="Accounting" ColumnName="Accounting" />
+                <ScalarProperty Name="UserInfo" ColumnName="UserInfo" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MessagePDU" ColumnName="MessagePDU" />
+                <ScalarProperty Name="Gateway" ColumnName="Gateway" />
+                <ScalarProperty Name="ErrorText" ColumnName="ErrorText" />
+                <ScalarProperty Name="ErrorCode" ColumnName="ErrorCode" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
+                <ScalarProperty Name="MessageTo" ColumnName="MessageTo" />
+                <ScalarProperty Name="StatusText" ColumnName="StatusText" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="ReceiveTime" ColumnName="ReceiveTime" />
+                <ScalarProperty Name="SendTime" ColumnName="SendTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageOuts">
+            <EntityTypeMapping TypeName="SMSServersModel.MessageOut">
+              <MappingFragment StoreEntitySet="MessageOut">
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="Scheduled" ColumnName="Scheduled" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="UserInfo" ColumnName="UserInfo" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Gateway" ColumnName="Gateway" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
+                <ScalarProperty Name="MessageTo" ColumnName="MessageTo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TTransactions">
+            <EntityTypeMapping TypeName="SMSServersModel.TTransaction">
+              <MappingFragment StoreEntitySet="TTransaction">
+                <ScalarProperty Name="Posted" ColumnName="Posted" />
+                <ScalarProperty Name="DateOperation" ColumnName="DateOperation" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SoldeFermeture" ColumnName="SoldeFermeture" />
+                <ScalarProperty Name="SoldeOuverture" ColumnName="SoldeOuverture" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TTransactionUploads">
+            <EntityTypeMapping TypeName="SMSServersModel.TTransactionUpload">
+              <MappingFragment StoreEntitySet="TTransactionUpload">
+                <ScalarProperty Name="Posted" ColumnName="Posted" />
+                <ScalarProperty Name="DateOperation" ColumnName="DateOperation" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SoldeFermeture" ColumnName="SoldeFermeture" />
+                <ScalarProperty Name="SoldeOuverture" ColumnName="SoldeOuverture" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="SMSServersModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Membership">
+            <EntityTypeMapping TypeName="SMSServersModel.webpages_Membership">
+              <MappingFragment StoreEntitySet="webpages_Membership">
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_OAuthMembership">
+            <EntityTypeMapping TypeName="SMSServersModel.webpages_OAuthMembership">
+              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="webpages_Roles">
+            <EntityTypeMapping TypeName="SMSServersModel.webpages_Roles">
+              <MappingFragment StoreEntitySet="webpages_Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zones">
+            <EntityTypeMapping TypeName="SMSServersModel.Zone">
+              <MappingFragment StoreEntitySet="Zones">
+                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+                <ScalarProperty Name="ZoneID" ColumnName="ZoneID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vTransactions">
+            <EntityTypeMapping TypeName="SMSServersModel.vTransaction">
+              <MappingFragment StoreEntitySet="vTransactions">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Solde_Fermeture" ColumnName="Solde Fermeture" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Solde_Ouverture" ColumnName="Solde Ouverture" />
+                <ScalarProperty Name="Nom_Client" ColumnName="Nom Client" />
+                <ScalarProperty Name="Nom_Commercial" ColumnName="Nom Commercial" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="SMSServersModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="SMSServersModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="UserProfile">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="spTransDay" FunctionName="SMSServersModel.Store.spTransDay">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSServersModel.spTransDay_Result">
+                <ScalarProperty Name="Heure" ColumnName="Heure" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="cTotal" ColumnName="cTotal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spTransDayColPay" FunctionName="SMSServersModel.Store.spTransDayColPay">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSServersModel.spTransDayColPay_Result">
+                <ScalarProperty Name="Heure" ColumnName="Heure" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="cTotal" ColumnName="cTotal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spTransPie" FunctionName="SMSServersModel.Store.spTransPie">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSServersModel.spTransPie_Result">
+                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="PostedTansactions">
+            <EntityTypeMapping TypeName="SMSServersModel.PostedTansaction">
+              <MappingFragment StoreEntitySet="PostedTansactions">
+                <ScalarProperty Name="SNouveauClient" ColumnName="SNouveauClient" />
+                <ScalarProperty Name="SPayable" ColumnName="SPayable" />
+                <ScalarProperty Name="SCollectes" ColumnName="SCollectes" />
+                <ScalarProperty Name="SPaiments" ColumnName="SPaiments" />
+                <ScalarProperty Name="Numtrans" ColumnName="Numtrans" />
+                <ScalarProperty Name="AgentInfo" ColumnName="AgentInfo" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PostingStamp" ColumnName="PostingStamp" />
+                <ScalarProperty Name="PostingID" ColumnName="PostingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientsUploads">
+            <EntityTypeMapping TypeName="SMSServersModel.ClientsUpload">
+              <MappingFragment StoreEntitySet="ClientsUpload">
+                <ScalarProperty Name="Posted" ColumnName="Posted" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Sexe" ColumnName="Sexe" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Solde" ColumnName="Solde" />
+                <ScalarProperty Name="Mise" ColumnName="Mise" />
+                <ScalarProperty Name="ClientTel" ColumnName="ClientTel" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Testers">
+            <EntityTypeMapping TypeName="SMSServersModel.Tester">
+              <MappingFragment StoreEntitySet="Tester">
+                <ScalarProperty Name="Variables" ColumnName="Variables" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spToBePosted" FunctionName="SMSServersModel.Store.spToBePosted">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSServersModel.spToBePosted_Result">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+                <ScalarProperty Name="NTrans" ColumnName="NTrans" />
+                <ScalarProperty Name="SPaiement" ColumnName="SPaiement" />
+                <ScalarProperty Name="SCollet" ColumnName="SCollet" />
+                <ScalarProperty Name="SNouveauClient" ColumnName="SNouveauClient" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spToBePostedUploaded" FunctionName="SMSServersModel.Store.spToBePostedUploaded">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSServersModel.spToBePostedUploaded_Result">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+                <ScalarProperty Name="NTrans" ColumnName="NTrans" />
+                <ScalarProperty Name="SPaiement" ColumnName="SPaiement" />
+                <ScalarProperty Name="SCollet" ColumnName="SCollet" />
+                <ScalarProperty Name="SNouveauClient" ColumnName="SNouveauClient" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spToBeValidated" FunctionName="SMSServersModel.Store.spToBeValidated">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSServersModel.spToBeValidated_Result">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+                <ScalarProperty Name="NTrans" ColumnName="NTrans" />
+                <ScalarProperty Name="SPaiement" ColumnName="SPaiement" />
+                <ScalarProperty Name="SCollet" ColumnName="SCollet" />
+                <ScalarProperty Name="SNouveauClient" ColumnName="SNouveauClient" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spUpdatePosted" FunctionName="SMSServersModel.Store.spUpdatePosted" />
+          <FunctionImportMapping FunctionImportName="toRealign" FunctionName="SMSServersModel.Store.toRealign">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSServersModel.toRealign_Result">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="SoldeOuverture" ColumnName="SoldeOuverture" />
+                <ScalarProperty Name="SoldeFermeture" ColumnName="SoldeFermeture" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Posted" ColumnName="Posted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Validations" FunctionName="SMSServersModel.Store.Validations">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SMSServersModel.Validations_Result">
+                <ScalarProperty Name="PostingStamp" ColumnName="PostingStamp" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+                <ScalarProperty Name="Numtrans" ColumnName="Numtrans" />
+                <ScalarProperty Name="SPaiments" ColumnName="SPaiments" />
+                <ScalarProperty Name="SCollectes" ColumnName="SCollectes" />
+                <ScalarProperty Name="SPayable" ColumnName="SPayable" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TerminalAssigneds">
+            <EntityTypeMapping TypeName="SMSServersModel.TerminalAssigned">
+              <MappingFragment StoreEntitySet="TerminalAssigned">
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+                <ScalarProperty Name="DateAssigned" ColumnName="DateAssigned" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="TerminalID" ColumnName="TerminalID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Terminals">
+            <EntityTypeMapping TypeName="SMSServersModel.Terminal">
+              <MappingFragment StoreEntitySet="Terminals">
+                <ScalarProperty Name="EMEI" ColumnName="EMEI" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TerminalID" ColumnName="TerminalID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TerminalTypes">
+            <EntityTypeMapping TypeName="SMSServersModel.TerminalType">
+              <MappingFragment StoreEntitySet="TerminalTypes">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="SMSServersModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="HasManualEntry" ColumnName="HasManualEntry" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

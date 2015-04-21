@@ -1,0 +1,114 @@
+﻿@using System.Web.Mvc.Html;
+@using iCelerium.Models.BodyClasses;
+
+@model List<ValidationViewModel>
+
+@{
+    ViewBag.Title = "Validations";
+}
+<h3><i class="fa fa-tasks"></i> Validations </h3>
+<hr>
+<div class="row">
+    @using (Html.BeginForm("ValidationsList", "Posting", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <div class="input-group ">
+                    <span class="input-group-addon "><i class="fa fa-calendar bigger-110"></i></span>
+                    @Html.TextBox("sDate", null, new { @class = "form-control date-picker Date" })
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <div class="input-group ">
+                    <span class="input-group-addon "><i class="fa fa-calendar bigger-110"></i></span>
+                    @Html.TextBox("eDate", null, new { @class = "form-control date-picker Date2" })
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+
+            <div class="form-group">
+                <div class="input-group ">
+                    <span class="input-group-addon "><i class="fa fa-user bigger-110"></i></span>
+                    @Html.DropDownList("UserID", null, "Pointeur", new { @class = "form-control dropdown", style = "font-family:Lato;" })
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="submit" value="Go" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+</div>
+<div class="row">
+    <div  class="panel panel-success" >
+        <table class="table table-striped">
+            <thead style=" font-weight:bold" class="alert-success" >
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.First().PostingStamp)</td>
+                    <td>@Html.DisplayNameFor(model => model.First().FullName)</td>
+                    <td>@Html.DisplayNameFor(model => model.First().AgentName)</td>
+                    <td>@Html.DisplayNameFor(model => model.First().Numtrans)</td>
+                    <td>@Html.DisplayNameFor(model => model.First().SPaiments)</td>
+                    <td>@Html.DisplayNameFor(model => model.First().SCollectes)</td>
+                    <td>@Html.DisplayNameFor(model => model.First().SPayable)</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelitem => item.PostingStamp)</td>
+                        <td>@Html.DisplayFor(modelitem => item.FullName)</td>
+                        <td>@Html.DisplayFor(modelitem => item.AgentName)</td>
+                        <td>@Html.DisplayFor(modelitem => item.Numtrans)</td>
+                        <td>@Html.DisplayFor(modelitem => item.SPaiments)</td>
+                        <td>@Html.DisplayFor(modelitem => item.SCollectes)</td>
+                        <td>@Html.DisplayFor(modelitem => item.SPayable)</td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot style=" font-weight:bold" class="alert-info">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Montant total</td>
+                    <td>@ViewBag.total</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui.unobtrusive-2.2.0.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+}

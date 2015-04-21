@@ -1,0 +1,61 @@
+﻿@model IEnumerable<iCelerium.Models.vTransaction>
+<script src="~/Scripts/customScript.js"></script>
+<link href="~/Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+}
+
+
+@using (Html.BeginForm("_Partial8", "Reports", FormMethod.Post))
+{
+    <div class="row" style="font-family:Lato;">
+        <div class="col-md-6">
+            <div class="form-group">
+                <div class="input-group ">
+                    <span class="input-group-addon"><i class="fa fa-user bigger-110"></i></span>
+                    @Html.DropDownList("searchAgent", null, "Agent", new { @class = "form-control dropdown", style = "font-family:Lato;" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="font-family:Lato;">
+        <div class="col-md-6">
+            <div class="form-group">
+                @*@Html.Label("Date Operation", null, new { @class = "date" })*@
+                @Html.Label("Date Debut", null, new { @class = "control-label" })
+                <div class="input-group ">
+                    <span class="input-group-addon "><i class="fa fa-calendar bigger-110"></i></span>
+                    @Html.TextBox("searchDate", null, new { @class = "form-control date-picker", style = "font-family:Lato;" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                @*@Html.Label("Date Operation", null, new { @class = "date" })*@
+                @Html.Label("Date Fin", null, new { @class = "control-label" })
+                <div class="input-group ">
+                    <span class="input-group-addon "><i class="fa fa-calendar bigger-110"></i></span>
+                    @Html.TextBox("searchDate1", null, new { @class = "form-control date-picker Date2", style = "font-family:Lato;" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row" style="font-family:Lato;">
+        <hr />
+        <div class="form-group">
+            <div class="input-group col-md-1">
+                <input type="submit" value="Exporter" class="form-control btn btn-success" style="font-family:Lato;" />
+                <span class="input-group-addon"><i class="fa fa-file-excel-o"></i></span>
+            </div>
+        </div>
+    </div>
+}

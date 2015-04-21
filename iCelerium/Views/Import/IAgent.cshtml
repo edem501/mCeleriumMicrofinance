@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Importer Agents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>
+    <i class="fa fa-file-excel-o"></i> @ViewBag.Title
+</h3>
+
+<hr>
+
+@using (Html.BeginForm("Agent", "Import", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table>
+        <tr><td></td><td><input type="file" id="FileUpload1" name="FileUpload1" class="form-control" required/></td></tr>
+        <tr><td></td><td><input type="submit" id="Submit" name="Submit" value="Importer" class="btn btn-primary"/></td></tr>
+    </table>
+    <div id="DropZone">
+
+    </div>
+}

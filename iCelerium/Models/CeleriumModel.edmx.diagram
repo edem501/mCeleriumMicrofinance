@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f869b626cc3846ea987e0cfc4b91a3cd" Name="Diagram1">
+        <EntityTypeShape EntityType="SMSServersModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SMSServersModel.AgentAssignClient" Width="1.5" PointX="7.75" PointY="0.5" />
+        <EntityTypeShape EntityType="SMSServersModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="SMSServersModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="SMSServersModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="SMSServersModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="SMSServersModel.AuditRecord" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SMSServersModel.Client" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SMSServersModel.Commerciaux" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SMSServersModel.MessageIn" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SMSServersModel.MessageLog" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SMSServersModel.MessageOut" Width="1.5" PointX="9.75" PointY="4.75" />
+        <EntityTypeShape EntityType="SMSServersModel.TTransaction" Width="1.5" PointX="4.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SMSServersModel.TTransactionUpload" Width="1.5" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SMSServersModel.UserProfile" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="SMSServersModel.webpages_Membership" Width="1.5" PointX="6.75" PointY="10.75" />
+        <EntityTypeShape EntityType="SMSServersModel.webpages_OAuthMembership" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SMSServersModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="6.875" />
+        <EntityTypeShape EntityType="SMSServersModel.Zone" Width="1.5" PointX="11.75" PointY="3.75" />
+        <EntityTypeShape EntityType="SMSServersModel.vTransaction" Width="1.5" PointX="11.75" PointY="6.75" />
+        <AssociationConnector Association="SMSServersModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" />
+        <AssociationConnector Association="SMSServersModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SMSServersModel.AspNetUserRoles" />
+        <AssociationConnector Association="SMSServersModel.webpages_UsersInRoles" />
+        <EntityTypeShape EntityType="SMSServersModel.PostedTansaction" Width="1.5" PointX="12.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SMSServersModel.ClientsUpload" Width="1.5" PointX="9.375" PointY="13.75" />
+        <EntityTypeShape EntityType="SMSServersModel.Tester" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SMSServersModel.TerminalAssigned" Width="1.5" PointX="14" PointY="3.5" />
+        <EntityTypeShape EntityType="SMSServersModel.Terminal" Width="1.5" PointX="11.75" PointY="17.75" />
+        <EntityTypeShape EntityType="SMSServersModel.TerminalType" Width="1.5" PointX="9.5" PointY="18.125" />
+        <AssociationConnector Association="SMSServersModel.FK_TerminalAssigned_AspNetUsers" />
+        <AssociationConnector Association="SMSServersModel.FK_TerminalAssigned_Commerciaux" />
+        <AssociationConnector Association="SMSServersModel.FK_TerminalAssigned_Terminals" />
+        <AssociationConnector Association="SMSServersModel.FK_Terminals_TerminalTypes" />
+        <EntityTypeShape EntityType="SMSServersModel.Setting" Width="1.5" PointX="5.375" PointY="14.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

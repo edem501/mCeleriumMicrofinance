@@ -1,0 +1,54 @@
+﻿
+@model iCelerium.Models.DashboardViewModel
+
+@{
+    ViewBag.Title = iCelerium.Views.Strings.Home;
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+<script src="~/Scripts/jquery-ui.unobtrusive-2.2.0.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+
+}
+
+ 
+        <h3><i class="fa fa-dashboard"></i>@iCelerium.Views.Strings.Dashboard</h3>
+
+        <hr>
+
+
+        <div class="row">
+            <!-- center left-->
+            <div class="col-md-6">
+                <a href='@Url.Action("TransChart", "Home")'>
+                    <div class="panel panel-default">
+                        @*<div class="panel-heading"><h4>Processing Status</h4></div>*@
+                        <div class="panel-body">
+                            <div id="refresh1">
+                            @Html.Partial("_TransDaily", Model.Chart1)
+                        </div>
+                        </div><!--/panel-body-->
+                    </div><!--/panel-->
+                </a>
+            </div><!--/col-->
+            <!--center-right-->
+            <div class="col-md-6">
+                <a href='@Url.Action("PieChart", "Home")'>
+                    <div class="panel panel-default">
+                        @*<div class="panel-heading"><h4>Processing Status</h4></div>*@
+                        <div class="panel-body">
+                            <div id="refresh">
+                                @Html.Partial("_PieChart", Model.Chart2)
+                            </div>
+                        </div><!--/panel-body-->
+                    </div><!--/panel-->
+                </a>
+            </div><!--/col-span-6-->
+
+        </div><!--/row-->
+

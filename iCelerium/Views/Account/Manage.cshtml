@@ -1,0 +1,29 @@
+﻿@using iCelerium.Models;
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Manage Account";
+}
+
+
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<h3><i class="fa fa-bolt"></i><strong>@User.Identity.GetUserName()</strong></h3>
+
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        @if (ViewBag.HasLocalPassword)
+        {
+            @Html.Partial("_ChangePasswordPartial")
+        }
+        else
+        {
+            @Html.Partial("_SetPasswordPartial")
+        }
+
+        
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

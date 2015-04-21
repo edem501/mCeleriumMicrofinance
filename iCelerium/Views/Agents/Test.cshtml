@@ -1,0 +1,45 @@
+﻿@model PagedList.IPagedList<iCelerium.Models.Commerciaux>
+@using PagedList.Mvc;
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript" language="javascript">
+    function ClearResults() {
+        $("#AgentPartial").empty;
+    }
+</script>
+@{
+    ViewBag.Title = "Commerciaux";
+}
+<div class="jumbotron">
+    <h2>@ViewBag.Title</h2>
+</div>
+@using (Ajax.BeginForm("Simple", "Agents", new AjaxOptions
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "AgentPartial",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "Spinner",
+    OnBegin = "ClearResults"
+
+}))
+{
+    <div class="form-group">
+
+
+        @Html.Label(@iCelerium.Views.Strings.Search, null, new { @class = "control-label" })
+
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Entrez le nom ici..." })
+        <input type="submit" value="Go" class="btn btn-sm" style="visibility:hidden;" />
+
+
+    </div>
+}
+<div id="Spinner" style="display:none">
+    <img src="~/Images/spiffygif.gif" />
+</div>
+<div id="AgentPartial" class="row">
+
+</div>
+
+
+

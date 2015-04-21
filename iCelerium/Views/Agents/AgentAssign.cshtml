@@ -1,0 +1,44 @@
+﻿@using iCelerium.Models.BodyClasses;
+@using iCelerium.Models;
+@model iCelerium.Models.BodyClasses.AgentClientsModel
+@{
+    ViewBag.Title = "Membres";
+}
+
+<h3><i class="fa fa-users"></i> @ViewBag.Title</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-12 alert alert-info">
+        <strong>@Model.AgentName</strong><span class="badge pull-right">@Model.Membres.Count()</span>
+
+    </div>
+    
+</div>
+<div class="row">
+
+    <div class="col-md-12">
+        <table class="table table-striped" >
+            <tbody>
+                @foreach (Client item in Model.Membres.ToList())
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClientTel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Solde)
+                        </td>
+                        <td>
+                            <a href='@Url.Action("Transaction", "Clients", new { ClientId = item.ClientId })'> <i class="fa fa-bolt fa-fw fa-2x"></i></a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

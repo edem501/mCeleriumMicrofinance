@@ -1,0 +1,34 @@
+﻿
+@model List<iCelerium.Models.AspNetUser>
+@{
+    ViewBag.Title = "AccountsList";
+}
+
+<div class="row col-md-12">
+    <div class="panel panel-info">
+        <table class="table table-striped table-condensed table-roundcorners">
+            <thead style=" font-weight:bold" class="alert-info">
+                <tr>
+                    <th> Nom et prenoms </th>
+                    <th> Nom utlisateur </th>
+                    <th> E-mail </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-transform:uppercase">@Html.DisplayFor(modelItem => item.FullName)</td>
+                    <td style="text-transform:uppercase">@Html.DisplayFor(modelItem => item.UserName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>
+                       
+                        <a href='@Url.Action("Edit", "Account", new { id = item.Id })'> <i class="fa fa-edit fa-fw fa-2x"></i></a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        </div>
+    </div>

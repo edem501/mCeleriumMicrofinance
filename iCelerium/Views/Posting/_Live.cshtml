@@ -1,0 +1,26 @@
+﻿@model iCelerium.Models.PostingViewModel
+           <table class="table" >
+               
+               <tr>
+                   <td>@Html.DisplayNameFor(model=> model.NTrans)</td>
+                   <td>@Html.DisplayFor(model => model.NTrans)</td>
+               </tr>
+               <tr>
+                   <td>@Html.DisplayNameFor(model => model.SNouveauClient)</td>
+                   <td>@Html.DisplayFor(model => model.SNouveauClient)</td>
+               </tr>
+               <tr>
+                   <td>@Html.DisplayNameFor(model => model.SPaiement)</td>
+                   <td>@Html.DisplayFor(model => model.SPaiement)</td>
+               </tr>
+               <tr>
+                   <td>@Html.DisplayNameFor(model => model.SCollet)</td>
+                   <td>@Html.DisplayFor(model => model.SCollet)</td>
+               </tr>
+               <tfoot>
+                   <tr>
+                       <td><b>@Html.DisplayNameFor(model => model.Payable)</b></td>
+                       <td><b>@Html.DisplayFor(model => model.Payable)</b></td>
+                   </tr>
+               </tfoot>
+           </table>

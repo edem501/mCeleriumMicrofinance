@@ -1,0 +1,96 @@
+﻿@model PagedList.IPagedList<TransactionsViewModel>
+@using PagedList.Mvc;
+@using iCelerium.Models.BodyClasses;
+
+<div class="row">
+    <div class="panel panel-info">
+       
+        
+            <table class="table table-striped">
+                <thead style=" font-weight:bold" class="alert-info">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Nom_Commercial)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Nom_Client)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Solde_Ouverture)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Debit)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Credit)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Solde_Fermeture)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td style="text-transform:uppercase">
+                                @Html.DisplayFor(modelItem => item.Nom_Commercial)
+                            </td>
+                            <td style="text-transform:uppercase">
+                                @Html.DisplayFor(modelItem => item.Nom_Client)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Solde_Ouverture)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Debit)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Credit)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Solde_Fermeture)
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                                    @Html.ActionLink("Details", "Details", new { id=item.id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id=item.id })*@
+
+                                @*<a href='@Url.Action("Details", "Transactions", new { id = item.id })'> <i class="fa fa-info-circle fa-fw fa-2x"></i></a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Totaux</td>
+                        <td style="color:orangered">@ViewBag.sumD</td>
+                        <td style="color:green">@ViewBag.sumC</td>
+                        <td></td>
+
+                    </tr>
+
+                </tfoot>
+
+
+            </table>
+            
+           
+        </div>
+    <div style="text-align:right;">
+        @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchDate = ViewBag.VBsearchDate, agentModel = ViewBag.VBagentModel }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+    </div>
+        </div>

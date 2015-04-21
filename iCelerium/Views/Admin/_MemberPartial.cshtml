@@ -1,0 +1,22 @@
+﻿
+@model List<iCelerium.Models.BodyClasses.ClientsList>
+
+<table>
+    <thead>
+        <tr>
+            <td>Nom &Aacute; Prenoms</td>
+            <td>Transferer</td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.selected)</td>
+            </tr>
+        }
+       
+    </tbody>
+</table>

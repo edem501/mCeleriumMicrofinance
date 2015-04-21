@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNet.Identity
+@using Mvc.RazorTools.FontAwesome;
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right " }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink(@iCelerium.Views.Strings.Greeting + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">@Html.FontAwesome(FontAwesomeIconSet.Lock) @iCelerium.Views.Strings.LogOff</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        @*@if(HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+                    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+
+        }*@
+        <li>@Html.ActionLink(@iCelerium.Views.Strings.LogIn,"Login", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

@@ -1,0 +1,28 @@
+﻿/* Fonts etc. */
+@font-face					{font-family: 'Lato'; font-style: normal; font-weight: 300; src: local('Lato Light'), local('Lato-Light'), url(http://themes.googleusercontent.com/static/fonts/lato/v6/KT3KS9Aol4WfR6Vas8kNcg.woff) format('woff');}
+@font-face					{font-family: 'Pacifico'; font-style: normal; font-weight: 400; src: local('Pacifico Regular'), local('Pacifico-Regular'), url(http://themes.googleusercontent.com/static/fonts/pacifico/v5/yunJt0R8tCvMyj_V4xSjafesZW2xOQ-xsNqO47m55DA.woff) format('woff');}
+*::-moz-selection			{background-color: #ffffff; color: #1b528e; opacity: 1;}
+*::selection				{background-color: #ffffff; color: #1b528e; opacity: 1;}
+
+
+/* Styles */
+body						{font-family: 'Lato', 'Arial', 'sans-serif'; background-color: #f4f4f4; background: url('../img/background.png') no-repeat center center fixed; background-size: cover;}
+article						{width: 720px; margin: auto; margin-top: 70px;}
+article h1					{color: #1b528e; font-size: 5.5em; line-height: 1.75em; font-family: 'Pacifico', 'Times'; font-weight: 100; text-align: center; text-shadow: 0px 2px 2px #2c2c2c;}
+article h2					{color: #2c2c2c; width: 600px; margin: auto; font-size: 2em; line-height: 1.25em; font-family: 'Lato', 'Arial', 'sans-serif'; font-weight: 100; text-align: center;}
+article hr					{border: 0; border-bottom: 2px dashed #ccc;}
+article p						{font-size: 1.15em; line-height: 1.1em; letter-spacing: 2px; font-weight: 100; text-align: justify;}
+article p#ll					{padding: 2%; width: 46%; float: left; text-indent: 1em;}
+article p#rr					{padding: 2%; width: 98%; float: right; text-indent: 1em;}
+article .form					{width: 300px; background-color: transparent; border: 2px dashed #ccc; margin: 0px; padding: 5px; font-size: 1.2em; font-family: 'Lato', 'Arial', 'sans-serif';}
+article .form:focus			{outline: 0px;}
+article textarea				{border-top: 0px!important; border-bottom: 0px!important; height: 120px;}
+article input[type="submit"]	{background-color: #888888; color: #f4f4f4; border: 0px; width: 313px;}
+article input[type="submit"]	{-webkit-transition: .2s linear; -moz-transition: .2s linear; -o-transition: .2s linear; -ms-transition: .2s linear; transition: .2s linear}
+article input[type="submit"]:hover{background-color: #1b528e; color: #ffffff;} 
+article p#links				{text-align: center; margin-bottom: 90px; margin-top: 10px;}
+article p#alt					{padding: 2%;}
+article br.clear				{clear: both;}
+article a						{border: 0px!important;}
+article a:hover				{opacity: 0.5;}
+article img	{border: 0px!important;}

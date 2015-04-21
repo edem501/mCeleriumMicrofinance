@@ -1,0 +1,51 @@
+﻿@model PagedList.IPagedList<iCelerium.Models.Commerciaux>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Commerciaux";
+}
+<div class="jumbotron">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+@using( Ajax.BeginForm("Simple", "Agents", new AjaxOptions {
+                    HttpMethod="GET",
+                    UpdateTargetId = "AgentPartial",
+                    InsertionMode=InsertionMode.Replace
+    
+} ))
+
+{
+    <div class="form-group">
+
+
+        @Html.Label("Rechercher", null, new { @class = "control-label" })
+
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Entrez le nom ici..." })
+        <input type="submit" value="Go" class="btn btn-sm" style="visibility:hidden;" />
+
+
+    </div>
+}
+
+
+
+@{
+    if (TempData["Message"] != null)
+    {
+        <div id="dialog" title="Message" class="alert-info">
+            @TempData["Message"]
+        </div>
+    }
+
+}
+
+<script>
+
+    $("#dialog").dialog({
+        modal: true,
+        autoOpen: true
+
+    });
+</script>
+

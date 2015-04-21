@@ -1,0 +1,76 @@
+﻿@model iCelerium.Models.BodyClasses.EditAgentViewModels
+
+@{
+    ViewBag.Title = "Modifier agent";
+}
+<h3><i class="fa fa-user"></i> @ViewBag.Title</h3>
+
+<hr />
+    <div class="row">
+        <div class="col-md-12 form-horizontal">
+            <section id="loginForm">
+                @using (Html.BeginForm(new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Id)
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AgentId, new { @class = "col-md-3 control-label"})
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.AgentId, new { @class = "form-control", @readonly = true })
+                            @Html.ValidationMessageFor(model => model.AgentId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AgentName, new { @class = "col-md-3 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.AgentName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.AgentName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+        @Html.LabelFor(model => model.AgentTel, new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.TextBoxFor(model => model.AgentTel, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.AgentTel)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.AgentActif, new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+
+            @Html.CheckBoxFor(model => model.AgentActif,new { @class = "form-control", @checked = "Id" })
+            @Html.ValidationMessageFor(model => model.AgentActif)
+        </div>
+    </div>
+                    <div class="form-group">
+
+                <div class="input-group col-md-offset-3 col-md-4">
+                    <span class="input-group-addon"><i class="fa fa-globe bigger-110"></i></span>
+                    @Html.DropDownList("Zones", null, "Zones...", new { @class = "form-control dropdown" })
+
+                </div>
+            </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-3 col-md-9">
+                            <input type="submit" value=@iCelerium.Views.Strings.Save class="btn btn-success" />
+                            
+                                @Html.ActionLink(@iCelerium.Views.Strings.Cancel, "Index", null, new { @class = "btn btn-default" })
+                           
+                        </div>
+                    </div>
+                }
+            </section>
+        </div>
+    </div>
+   
+   
+ @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui.unobtrusive-2.2.0.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

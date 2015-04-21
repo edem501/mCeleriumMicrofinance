@@ -1,0 +1,428 @@
+﻿
+@{
+    ViewBag.Title = "Rapports";
+}
+<link href="~/Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.intellisense.js"></script>
+}
+
+<script type="text/javascript" language="javascript">
+
+
+    $(function () {
+        jQuery.fn.justtext = function () {
+
+            return $(this).clone()
+                    .children()
+                    .remove()
+                    .end()
+                    .text();
+
+        };
+
+        $("Div.clik1").click(function (event) {
+            var myid = jQuery(this).attr("id");
+            var titre;
+            switch (myid) {
+                case '1':
+                     view = '/Reports/_PartialOne';
+                     titre = 'Liste des transactions';
+                    InitializeDialog($("#mydialog"), view,titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                case '2':
+                     view = '/Reports/_PartialTwo';
+                     titre = 'Transactions par agent';
+                    InitializeDialog($("#mydialog"), view,titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                case '3':
+                    view = '/Reports/_Partial3';
+                    titre = 'Transactions par client';
+                    InitializeDialog($("#mydialog"), view, titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                case '4':
+                    view = '/Reports/_Partial4';
+                    titre = 'Liste des collectes';
+                    InitializeDialog($("#mydialog"), view, titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                case '5':
+                    view = '/Reports/_Partial5';
+                    titre = 'Collectes par agent';
+                    InitializeDialog($("#mydialog"), view, titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                case '6':
+                    view = '/Reports/_Partial6';
+                    titre = 'Collectes par client';
+                    InitializeDialog($("#mydialog"), view, titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                case '7':
+                    view = '/Reports/_Partial7';
+                    titre = 'Liste des paiements';
+                    InitializeDialog($("#mydialog"), view, titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                case '8':
+                    view = '/Reports/_Partial8';
+                    titre = 'Paiements par agent';
+                    InitializeDialog($("#mydialog"), view, titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                case '9':
+                    view = '/Reports/_Partial9';
+                    titre = 'Paiements par client';
+                    InitializeDialog($("#mydialog"), view, titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                case '10':
+                    view = '/Reports/_Partial10';
+                    titre = 'Liste des recouvrements';
+                    InitializeDialog($("#mydialog"), view, titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                case '11':
+                    view = '/Reports/_Partial11';
+                    titre = 'Recouvrements par agent';
+                    InitializeDialog($("#mydialog"), view, titre);
+                    $("#mydialog").dialog("open");
+                    break;
+                
+               default:
+                   InitializeDialog($("#mydialog"), '/Reports/_Partial12', 'Recouvrements par client');
+                    $("#mydialog").dialog("open");
+            }
+           
+        });
+
+
+
+        //Method to Initialize the DialogBox
+        function InitializeDialog($element,$view,$titre) {
+
+            $element.dialog({
+                autoOpen: false,
+                //width: 'auto',
+                width: 480,
+                fluid: true,
+                height: 300,
+                resizable: false,
+                draggable: false,
+                title: $titre,
+                modal: true,
+                show: 'slide',
+                //closeText: 'x',
+                dialogClass: 'alert',
+                closeOnEscape: true,
+                open: function (event, ui) {
+                    //Load the Partial View Here using Controller and Action
+                    
+                    $element.load($view);
+
+                },
+
+                close: function (event, ui) {
+                    window.location.href = '/Reports/Index';
+                }
+            });
+
+        }
+    });
+
+
+</script>
+
+<h3><i class="fa fa-sort"></i> @ViewBag.Title</h3>
+
+<hr>
+<div class="row">
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-bar-chart fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">1</div>
+                        <div class="titre">Liste des transactions</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#" >
+                <div class="panel-footer clik1" id="1">
+                    <span class="pull-left" >Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">2</div>
+                        <div class="titre">Transaction par agent</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="2">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-user fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">3</div>
+                        <div>Transactions par client</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="3">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-money fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">4</div>
+                        <div>Liste des collectes</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="4">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-usd fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">5</div>
+                        <div>Collectes par agent</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="5">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-euro fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">6</div>
+                        <div>Collectes par client</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="6">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-credit-card fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">7</div>
+                        <div>Liste des paiements</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="7">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-database fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">8</div>
+                        <div>Paiements par agent</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="8">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-gbp fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">9</div>
+                        <div>Paiements par client</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="9">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-euro fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">10</div>
+                        <div>Liste des recouvrements</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="10">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-collapse">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-usd fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">11</div>
+                        <div>Recouvrements par agent</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="11">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 col-md-6">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-money fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">12</div>
+                        <div>Recouvrements par client</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer clik1" id="12">
+                    <span class="pull-left">Afficher</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="mydialog" title="Rapports">
+
+</div>
