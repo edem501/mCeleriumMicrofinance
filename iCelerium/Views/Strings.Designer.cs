@@ -178,6 +178,15 @@ namespace iCelerium.Views {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product Name.
+        /// </summary>
+        public static string CreditType {
+            get {
+                return ResourceManager.GetString("CreditType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily amount.
         /// </summary>
         public static string Daily {
@@ -192,6 +201,24 @@ namespace iCelerium.Views {
         public static string Dashboard {
             get {
                 return ResourceManager.GetString("Dashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of Echeance.
+        /// </summary>
+        public static string Duration {
+            get {
+                return ResourceManager.GetString("Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Echeance.
+        /// </summary>
+        public static string Echeance {
+            get {
+                return ResourceManager.GetString("Echeance", resourceCulture);
             }
         }
         
@@ -237,6 +264,15 @@ namespace iCelerium.Views {
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Interest Rate(% per period).
+        /// </summary>
+        public static string InterestRate {
+            get {
+                return ResourceManager.GetString("InterestRate", resourceCulture);
             }
         }
         

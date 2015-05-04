@@ -1,0 +1,12 @@
+﻿@using iCelerium.Models.BodyClasses;
+@model List<CreateCreditTypeViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@foreach (CreateCreditTypeViewModel item in Model)
+{
+    <p>@Html.DisplayTextFor(model=>item.TypeName)</p>
+}

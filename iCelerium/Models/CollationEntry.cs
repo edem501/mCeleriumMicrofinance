@@ -12,14 +12,14 @@ namespace iCelerium.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AgentAssignClient
+    public partial class CollationEntry
     {
-        public int id { get; set; }
-        public string AgentId { get; set; }
-        public string ClientId { get; set; }
-        public System.DateTime DateAssignee { get; set; }
-    
-        public virtual AgentAssignClient AgentAssignClient1 { get; set; }
-        public virtual AgentAssignClient AgentAssignClient2 { get; set; }
+        public int ID { get; set; }
+        public string AgentID { get; set; }
+        public string ConstituencyID { get; set; }
+        public int PartyID { get; set; }
+        public System.DateTime DateSend { get; set; }
+        public int NumberOfVote { get; set; }
+        public Nullable<int> PollingStationID { get; set; }
     }
 }

@@ -12,14 +12,19 @@ namespace iCelerium.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AgentAssignClient
+    public partial class Region
     {
-        public int id { get; set; }
-        public string AgentId { get; set; }
-        public string ClientId { get; set; }
-        public System.DateTime DateAssignee { get; set; }
+        public Region()
+        {
+            this.Agents = new HashSet<Agent>();
+            this.Districts = new HashSet<District>();
+        }
     
-        public virtual AgentAssignClient AgentAssignClient1 { get; set; }
-        public virtual AgentAssignClient AgentAssignClient2 { get; set; }
+        public int ID { get; set; }
+        public string RegionName { get; set; }
+        public string Symbol { get; set; }
+    
+        public virtual ICollection<Agent> Agents { get; set; }
+        public virtual ICollection<District> Districts { get; set; }
     }
 }

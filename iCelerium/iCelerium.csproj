@@ -227,6 +227,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AgentsController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\CreditsController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HoTosController.cs" />
@@ -243,6 +244,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Agent.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AgentAssignClient.cs">
       <DependentUpon>CeleriumModel.tt</DependentUpon>
     </Compile>
@@ -264,6 +268,7 @@
     </Compile>
     <Compile Include="Models\AuditViewModel.cs" />
     <Compile Include="Models\BodyClasses\AgentViewModels.cs" />
+    <Compile Include="Models\BodyClasses\CreditsViewModels.cs" />
     <Compile Include="Models\BodyClasses\ErrorCls.cs" />
     <Compile Include="Models\BodyClasses\ManualEntriesViewModel.cs" />
     <Compile Include="Models\BodyClasses\TransactionsViewModels.cs" />
@@ -291,13 +296,34 @@
       <DependentUpon>CeleriumModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientsViewModel.cs" />
+    <Compile Include="Models\CollationEntry.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Commerciaux.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Constituency.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Credit.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CreditType.cs">
       <DependentUpon>CeleriumModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>CeleriumModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\District.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Echeance.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EditUserViewModel.cs" />
+    <Compile Include="Models\ElectoralArea.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Interfaces\IAspNetUser.cs" />
     <Compile Include="Models\Interfaces\ICommerciaux.cs" />
@@ -313,7 +339,16 @@
     <Compile Include="Models\MessageOut.cs">
       <DependentUpon>CeleriumModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Party.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PollingStation.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PostedTansaction.cs">
+      <DependentUpon>CeleriumModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Region.cs">
       <DependentUpon>CeleriumModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Setting.cs">
@@ -709,6 +744,9 @@
     <Content Include="Views\Posting\Manual.cshtml" />
     <Content Include="Views\Import\IAgent.cshtml" />
     <Content Include="Views\Import\IMember.cshtml" />
+    <Content Include="Views\Credits\Create.cshtml" />
+    <Content Include="Views\Credits\Index.cshtml" />
+    <Content Include="Views\Credits\Contract.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

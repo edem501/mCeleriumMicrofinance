@@ -12,14 +12,18 @@ namespace iCelerium.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AgentAssignClient
+    public partial class ElectoralArea
     {
-        public int id { get; set; }
-        public string AgentId { get; set; }
-        public string ClientId { get; set; }
-        public System.DateTime DateAssignee { get; set; }
+        public ElectoralArea()
+        {
+            this.PollingStations = new HashSet<PollingStation>();
+        }
     
-        public virtual AgentAssignClient AgentAssignClient1 { get; set; }
-        public virtual AgentAssignClient AgentAssignClient2 { get; set; }
+        public int ID { get; set; }
+        public string ElectoralAreaName { get; set; }
+        public int Constituency { get; set; }
+    
+        public virtual Constituency Constituency1 { get; set; }
+        public virtual ICollection<PollingStation> PollingStations { get; set; }
     }
 }

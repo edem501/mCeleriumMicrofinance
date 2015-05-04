@@ -12,14 +12,10 @@ namespace iCelerium.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AgentAssignClient
+    public partial class Party
     {
-        public int id { get; set; }
-        public string AgentId { get; set; }
-        public string ClientId { get; set; }
-        public System.DateTime DateAssignee { get; set; }
-    
-        public virtual AgentAssignClient AgentAssignClient1 { get; set; }
-        public virtual AgentAssignClient AgentAssignClient2 { get; set; }
+        public int ID { get; set; }
+        public string PartyName { get; set; }
+        public string Abrev { get; set; }
     }
 }

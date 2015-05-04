@@ -12,14 +12,15 @@ namespace iCelerium.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AgentAssignClient
+    public partial class CreditType
     {
-        public int id { get; set; }
-        public string AgentId { get; set; }
-        public string ClientId { get; set; }
-        public System.DateTime DateAssignee { get; set; }
+        public int ID { get; set; }
+        public string TypeID { get; set; }
+        public string TypeName { get; set; }
+        public int EcheanceID { get; set; }
+        public double InterestRate { get; set; }
+        public int Duration { get; set; }
     
-        public virtual AgentAssignClient AgentAssignClient1 { get; set; }
-        public virtual AgentAssignClient AgentAssignClient2 { get; set; }
+        public virtual Echeance Echeance { get; set; }
     }
 }

@@ -40,6 +40,29 @@
         <AssociationConnector Association="SMSServersModel.FK_TerminalAssigned_Terminals" />
         <AssociationConnector Association="SMSServersModel.FK_Terminals_TerminalTypes" />
         <EntityTypeShape EntityType="SMSServersModel.Setting" Width="1.5" PointX="5.375" PointY="14.75" />
+        <EntityTypeShape EntityType="SMSServersModel.Agent" Width="1.5" PointX="26" PointY="7.5" />
+        <EntityTypeShape EntityType="SMSServersModel.CollationEntry" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="SMSServersModel.Constituency" Width="1.5" PointX="19.25" PointY="14.125" />
+        <EntityTypeShape EntityType="SMSServersModel.CreditType" Width="1.5" PointX="19" PointY="1" />
+        <EntityTypeShape EntityType="SMSServersModel.District" Width="1.5" PointX="17" PointY="14.25" />
+        <EntityTypeShape EntityType="SMSServersModel.Echeance" Width="1.5" PointX="16.75" PointY="1.375" />
+        <EntityTypeShape EntityType="SMSServersModel.ElectoralArea" Width="1.5" PointX="21.5" PointY="14.375" />
+        <EntityTypeShape EntityType="SMSServersModel.Party" Width="1.5" PointX="14.75" PointY="7.75" />
+        <EntityTypeShape EntityType="SMSServersModel.PollingStation" Width="1.5" PointX="23.75" PointY="14" />
+        <EntityTypeShape EntityType="SMSServersModel.Region" Width="1.5" PointX="14.75" PointY="10.5" />
+        <AssociationConnector Association="SMSServersModel.FK_AgentAssignClient_AgentAssignClient" />
+        <AssociationConnector Association="SMSServersModel.FK_Agents_AspNetUsers" />
+        <AssociationConnector Association="SMSServersModel.FK_Agents_Constituencies" />
+        <AssociationConnector Association="SMSServersModel.FK_Agents_Districts" />
+        <AssociationConnector Association="SMSServersModel.FK_Agents_PollingStations" />
+        <AssociationConnector Association="SMSServersModel.FK_Agents_Regions" />
+        <AssociationConnector Association="SMSServersModel.FK_Constituencies_Districts" />
+        <AssociationConnector Association="SMSServersModel.FK_ElectoralAreas_Constituencies" />
+        <AssociationConnector Association="SMSServersModel.FK_CreditTypes_Echeances" />
+        <AssociationConnector Association="SMSServersModel.FK_Districts_Regions" />
+        <AssociationConnector Association="SMSServersModel.FK_PollingStations_ElectoralAreas" />
+        <EntityTypeShape EntityType="SMSServersModel.Credit" Width="1.5" PointX="5.25" PointY="17.625" />
+        <AssociationConnector Association="SMSServersModel.FK_Credits_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

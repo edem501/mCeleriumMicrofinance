@@ -249,4 +249,16 @@
   <data name="Amount" xml:space="preserve">
     <value>Montant</value>
   </data>
+  <data name="CreditType" xml:space="preserve">
+    <value>Nom du Produit</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Nombre d'echeance</value>
+  </data>
+  <data name="Echeance" xml:space="preserve">
+    <value>Type Echeance</value>
+  </data>
+  <data name="InterestRate" xml:space="preserve">
+    <value>Taux d'interet (en % par periode)</value>
+  </data>
 </root>

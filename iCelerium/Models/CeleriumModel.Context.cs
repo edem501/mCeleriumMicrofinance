@@ -54,6 +54,17 @@ namespace iCelerium.Models
         public virtual DbSet<Terminal> Terminals { get; set; }
         public virtual DbSet<TerminalType> TerminalTypes { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<Agent> Agents { get; set; }
+        public virtual DbSet<CollationEntry> CollationEntries { get; set; }
+        public virtual DbSet<Constituency> Constituencies { get; set; }
+        public virtual DbSet<CreditType> CreditTypes { get; set; }
+        public virtual DbSet<District> Districts { get; set; }
+        public virtual DbSet<Echeance> Echeances { get; set; }
+        public virtual DbSet<ElectoralArea> ElectoralAreas { get; set; }
+        public virtual DbSet<Party> Parties { get; set; }
+        public virtual DbSet<PollingStation> PollingStations { get; set; }
+        public virtual DbSet<Region> Regions { get; set; }
+        public virtual DbSet<Credit> Credits { get; set; }
     
         public virtual ObjectResult<spTransDay_Result> spTransDay(string date1)
         {

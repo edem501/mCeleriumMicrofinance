@@ -20,6 +20,7 @@ namespace iCelerium.Models
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.AspNetRoles = new HashSet<AspNetRole>();
             this.TerminalAssigneds = new HashSet<TerminalAssigned>();
+            this.Credits = new HashSet<Credit>();
         }
     
         public string Id { get; set; }
@@ -34,5 +35,7 @@ namespace iCelerium.Models
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
         public virtual ICollection<TerminalAssigned> TerminalAssigneds { get; set; }
+        public virtual Agent Agent { get; set; }
+        public virtual ICollection<Credit> Credits { get; set; }
     }
 }
