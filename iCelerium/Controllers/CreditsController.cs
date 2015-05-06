@@ -86,9 +86,86 @@ namespace iCelerium.Controllers
         }
 
 
-        public ActionResult Contract()
+        public ActionResult Contract(string clientID)
         {
-            return View();
+            if (clientID == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                Client client = db.Clients.Where(c=>c.ClientId.Equals(clientID)).FirstOrDefault();
+                if (clientID == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    List<CreditType> lstech = db.CreditTypes.OrderBy(c=>c.TypeName).ToList();
+                    List<SelectListItem> items = new List<SelectListItem>();
+                    foreach (CreditType ech in lstech)
+                    {
+                        items.Add(new SelectListItem { Text = ech.TypeName.ToUpper(), Value = ech.TypeID.ToString().Trim() });
+                    }
+                    IEnumerable<SelectListItem> pop = items.AsEnumerable<SelectListItem>();
+
+                    ViewBag.TypeID = pop;
+                    ViewBag.ClientID = client.ClientId;
+                    ViewBag.SubTitle = client.Name;
+                    return View();
+                }
+                
+            }
+            
+        }
+
+        public ActionResult _Echelonnement(string TypeID, decimal Amount, DateTime DateFirstPyt)
+        {
+            CreditType creditType = db.CreditTypes.Where(c => c.TypeID.Equals(TypeID)).FirstOrDefault();
+            decimal IntRate = Convert.ToDecimal(creditType.InterestRate);
+            int Dur = creditType.Duration;
+            decimal TotalPayable = Convert.ToDecimal(Amount * (1 + IntRate * Dur * 0.001m));
+            decimal rest = Convert.ToDecimal(TotalPayable % Dur);
+            decimal SubPay = Convert.ToDecimal((TotalPayable - rest) / Dur);
+            decimal FirtPay = Convert.ToDecimal(SubPay + rest);
+
+            string dpart = creditType.Echeance.DPart.Trim();
+            List<echelon> lstEche = new List<echelon>();
+            decimal montant = TotalPayable;
+            DateTime dte = DateFirstPyt;
+
+            for (int i = 0; i < Dur; i++)
+            {
+                decimal pyt = 0;
+                ;
+                if(i==0)
+                {
+                    pyt = Math.Round(FirtPay, 2);
+                }
+                else
+                {
+                    pyt = SubPay;
+                }
+
+               
+                lstEche.Add(new echelon
+                {
+                    DateEcheance=dte.AddDays(i),
+                    MontantCredit=Convert.ToDouble(montant),
+                    MontantPayable=Convert.ToDouble(pyt),
+                    MontantRestant=Convert.ToDouble(montant-pyt)
+                });
+                //dte = dte.AddDays(1);
+                montant = montant - pyt;
+            }
+
+            ViewBag.TypeID = Math.Round(TotalPayable,2);
+            ViewBag.FirtPay =Math.Round(FirtPay,2);
+            ViewBag.SubPay = Math.Round(SubPay,2);
+            ViewBag.Amount = Amount;
+            ViewBag.DateFirstPyt = DateFirstPyt;
+
+            return PartialView(lstEche);
         }
     }
 }

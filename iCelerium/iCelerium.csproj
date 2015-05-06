@@ -747,6 +747,7 @@
     <Content Include="Views\Credits\Create.cshtml" />
     <Content Include="Views\Credits\Index.cshtml" />
     <Content Include="Views\Credits\Contract.cshtml" />
+    <Content Include="Views\Credits\_Echelonnement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,8 +1,91 @@
-﻿
+﻿@model iCelerium.Models.BodyClasses.NewContractViewModels
 @{
-    ViewBag.Title = "Contract";
+    ViewBag.Title ="Nouveau Contrat";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Contract</h2>
+
+<link href="~/Content/themes/base/jquery.ui.all.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+
+<h3><i class="fa fa-user"></i> @ViewBag.SubTitle</h3>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ClientID)
+        
+        <div class="form-group ">
+            @Html.LabelFor(model => model.TypeID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.TypeID, null,"---CREDIT---", new { @class = "form-control dropdown" })
+                @Html.ValidationMessageFor(model => model.TypeID)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Amount, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Amount)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateFirstPyt, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-addon "><i class="fa fa-calendar bigger-110"></i></span>
+                    @Html.TextBoxFor(model => model.DateFirstPyt, new { @class = "form-control Date" })
+                    @Html.ValidationMessageFor(model => model.DateFirstPyt)
+                </div>
+            </div>
+       </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@iCelerium.Views.Strings.Save" class="btn btn-success" />
+                @Html.ActionLink(@iCelerium.Views.Strings.Cancel, "Index", null, new { @class = "btn btn-default" })
+                <a onclick="drop()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Echelonnement</a>
+</div>
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Echelonement du credit</h4>
+                    </div>
+                    <div class="modal-body" id="modBody">
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script>
+        function drop() {
+            var ID = $("#TypeID").val();
+            $("#modBody").load('/Credits/_Echelonnement?TypeID=' + $("#TypeID").val() + '&Amount=' + $("#Amount").val() + '&DateFirstPyt=' + $("#DateFirstPyt").val());
+
+            $("#myModal").dialog("open");
+
+        }
+
+    </script>
+}
+
+
 

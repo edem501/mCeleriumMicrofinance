@@ -1,0 +1,30 @@
+﻿@using iCelerium.Models.BodyClasses;
+@model List<echelon>
+           
+<p>My ID: @ViewBag.TypeID</p>
+<p>FirstPyt: @ViewBag.FirtPay</p>
+<p>Subsequent Pyt: @ViewBag.SubPay</p>
+<p>My Amount: @ViewBag.Amount</p>
+<p>Start From: @ViewBag.DateFirstPyt</p>
+
+<table class="table table-striped" >
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model=>model.FirstOrDefault().DateEcheance)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantCredit)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantPayable)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantRestant)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (echelon item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.DateEcheance)</td>
+                <td>@Html.DisplayFor(modelItem => item.MontantCredit)</td>
+                <td>@Html.DisplayFor(modelItem => item.MontantPayable)</td>
+                <td>@Html.DisplayFor(modelItem => item.MontantRestant)</td>
+            </tr>
+        }
+    </tbody>
+</table>

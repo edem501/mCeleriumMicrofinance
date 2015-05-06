@@ -6,8 +6,23 @@ using System.Web;
 
 namespace iCelerium.Models.BodyClasses
 {
-    public class CreditsViewModels
+    public class echelon
     {
+        public DateTime DateEcheance { get; set; }
+        public double MontantCredit { get; set; }
+        public double MontantPayable { get; set; }
+        public double MontantRestant { get; set; }
+       
+
+    }
+    public class NewContractViewModels
+    {
+        public string ClientID { get; set; }
+        
+        public double Amount { get; set; }
+        public System.DateTime DateFirstPyt { get; set; }
+        public string TypeID { get; set; }
+       
     }
 
     public class CreateCreditTypeViewModel
