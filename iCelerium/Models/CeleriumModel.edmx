@@ -191,6 +191,7 @@
           </Key>
           <Property Name="EcheanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EcheanceName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DPart" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ElectoralAreas">
           <Key>
@@ -1591,6 +1592,7 @@ warning 6002: The table/view 'SMSServers.dbo.vTransactions' does not have a prim
           <Property Name="EcheanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EcheanceName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CreditTypes" Relationship="SMSServersModel.FK_CreditTypes_Echeances" FromRole="Echeance" ToRole="CreditType" />
+          <Property Name="DPart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ElectoralArea">
           <Key>
@@ -2296,6 +2298,7 @@ warning 6002: The table/view 'SMSServers.dbo.vTransactions' does not have a prim
           <EntitySetMapping Name="Echeances">
             <EntityTypeMapping TypeName="SMSServersModel.Echeance">
               <MappingFragment StoreEntitySet="Echeances">
+                <ScalarProperty Name="DPart" ColumnName="DPart" />
                 <ScalarProperty Name="EcheanceName" ColumnName="EcheanceName" />
                 <ScalarProperty Name="EcheanceID" ColumnName="EcheanceID" />
               </MappingFragment>

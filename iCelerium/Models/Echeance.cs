@@ -21,6 +21,7 @@ namespace iCelerium.Models
     
         public int EcheanceID { get; set; }
         public string EcheanceName { get; set; }
+        public string DPart { get; set; }
     
         public virtual ICollection<CreditType> CreditTypes { get; set; }
     }
