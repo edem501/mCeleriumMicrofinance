@@ -501,6 +501,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="CreateDatabaseAndObjects.sql" />
     <Content Include="favicon.ico" />
     <Content Include="font-awesome\css\font-awesome.css" />
     <Content Include="font-awesome\css\font-awesome.min.css" />
@@ -519,6 +520,7 @@
     <Content Include="Error1.html" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\spiffygif.gif" />
+    <Content Include="InsertDatabase.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\customScript.js" />
