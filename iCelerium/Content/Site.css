@@ -40,3 +40,23 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+/*Custom style for printing by edem fenou*/
+@media screen {
+  #printSection {
+      display: none;
+  }
+}
+
+@media print {
+  body * {
+    visibility:hidden;
+  }
+  #printSection, #printSection * {
+    visibility:visible;
+  }
+  #printSection {
+    position:absolute;
+    left:0;
+    top:0;
+  }
+}

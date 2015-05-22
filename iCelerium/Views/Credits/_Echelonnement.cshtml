@@ -1,30 +1,57 @@
 ﻿@using iCelerium.Models.BodyClasses;
 @model List<echelon>
-           
-<p>My ID: @ViewBag.TypeID</p>
-<p>FirstPyt: @ViewBag.FirtPay</p>
-<p>Subsequent Pyt: @ViewBag.SubPay</p>
-<p>My Amount: @ViewBag.Amount</p>
-<p>Start From: @ViewBag.DateFirstPyt</p>
+           <div id="PopUp">
+               <div class="row">
+                   <p>My ID: @ViewBag.TypeID</p>
+                   <p>FirstPyt: @ViewBag.FirtPay</p>
+                   <p>Subsequent Pyt: @ViewBag.SubPay</p>
+                   <p>My Amount: @ViewBag.Amount</p>
+                   <p>Start From: @ViewBag.DateFirstPyt</p>
 
-<table class="table table-striped" >
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model=>model.FirstOrDefault().DateEcheance)</th>
-            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantCredit)</th>
-            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantPayable)</th>
-            <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantRestant)</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (echelon item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.DateEcheance)</td>
-                <td>@Html.DisplayFor(modelItem => item.MontantCredit)</td>
-                <td>@Html.DisplayFor(modelItem => item.MontantPayable)</td>
-                <td>@Html.DisplayFor(modelItem => item.MontantRestant)</td>
-            </tr>
+               </div>
+               <div class="row">
+                   <table class="table table-striped">
+                       <thead>
+                           <tr>
+                               <th>@Html.DisplayNameFor(model => model.FirstOrDefault().DateEcheance)</th>
+                               <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantCredit)</th>
+                               <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantPayable)</th>
+                               <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantRestant)</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           @foreach (echelon item in Model)
+                           {
+                               <tr>
+                                   <td>@Html.DisplayFor(modelItem => item.DateEcheance)</td>
+                                   <td>@Html.DisplayFor(modelItem => item.MontantCredit)</td>
+                                   <td>@Html.DisplayFor(modelItem => item.MontantPayable)</td>
+                                   <td>@Html.DisplayFor(modelItem => item.MontantRestant)</td>
+                               </tr>
+                           }
+                       </tbody>
+                   </table>
+                   <input type="button" class="btn btn-default" onclick="printElement(document.getElementById('myModal'))" value="Print" />
+               </div>
+           </div>
+   
+<script type="text/javascript">
+    
+    function printElement(elem) {
+        
+        var domClone = elem.cloneNode(true);
+
+        var $printSection = document.getElementById("printSection");
+
+        if (!$printSection) {
+            var $printSection = document.createElement("div");
+            $printSection.id = "printSection";
+            document.body.appendChild($printSection);
         }
-    </tbody>
-</table>
+
+        $printSection.innerHTML = "";
+        $printSection.appendChild(domClone);
+        window.print();
+    }
+    
+</script>

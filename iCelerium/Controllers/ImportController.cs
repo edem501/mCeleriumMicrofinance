@@ -92,7 +92,8 @@ namespace iCelerium.Controllers
                            Sexe = agt["Sexe"],
                            Solde = GetSolde(agt["Solde"].Value.ToString())
                        };
-
+                    var text = agt["AgentName"];
+                    agentId = db.Commerciauxes.Where(c => c.AgentName.Equals(text)).FirstOrDefault().AgentId;
                     AddNewClient(client, agentId);
                 }
                 return RedirectToAction("Index", "Clients");
@@ -184,6 +185,7 @@ namespace iCelerium.Controllers
         {
 
             var excel = new ExcelQueryFactory(path);
+            
             var listofAgent = excel.Worksheet(0).ToList();
             return listofAgent;
 

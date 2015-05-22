@@ -752,6 +752,7 @@
     <Content Include="Views\Credits\_Echelonnement.cshtml" />
     <Content Include="TestAgent.xlsx" />
     <Content Include="TestMember.xlsx" />
+    <Content Include="Views\Credits\DailyDelivery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

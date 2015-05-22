@@ -1,0 +1,76 @@
+﻿@using iCelerium.Models.BodyClasses;
+@model List<dailyDeliveryViewModel>
+@{
+    ViewBag.Title = "DailyDelivery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3><i class="fa fa-users"></i>@ViewBag.Title</h3><hr />
+@using (Html.BeginForm(new { @class = "form-horizontal", role = "form" }))
+            {
+    @Html.AntiForgeryToken()
+       <div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <table class="table table-striped">
+                <thead style=" font-weight:bold" class="alert-info">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().ClientName)
+                        </th>
+                        
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().mise)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Solde)
+                        </th>
+                       
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().MontantCredit)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().status)
+                        </th>
+
+                       
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClientName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.mise)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Solde)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MontantCredit)
+                            </td>
+                           
+                            <td>
+                                @Html.CheckBoxFor(modelItem => item.status)
+                            </td>
+
+                            <td>
+                                <a href='@Url.Action("Transaction", "Clients", new { ClientId = item.ClientName })'> <i class="fa fa-bolt fa-fw fa-2x"></i></a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+           
+        </div>
+         <input type="submit" value="Livrer" class="btn btn-success" />
+    </div>
+</div>
+}

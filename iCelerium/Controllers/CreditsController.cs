@@ -167,5 +167,34 @@ namespace iCelerium.Controllers
 
             return PartialView(lstEche);
         }
+
+        public ActionResult DailyDelivery()
+        {
+            DateTime date = new DateTime();
+            date = DateTime.Today.AddDays(-10);
+            List<Credit> lstCredits = db.Credits.Where(c => c.status == false & c.DateCreated < date).ToList();
+            List<dailyDeliveryViewModel> lstmodel = new List<dailyDeliveryViewModel>();
+            foreach (Credit dvml in lstCredits)
+            {
+                Client client = db.Clients.Where(c => c.ClientId.Equals(dvml.ClientID)).FirstOrDefault();
+                lstmodel.Add(new dailyDeliveryViewModel
+                {
+                    ClientName=client.Name,
+                    mise=client.Mise.Value,
+                    MontantCredit= dvml.Amount,
+                    Solde=client.Solde.Value,
+                    status=dvml.status
+                });
+            }
+
+
+            return View(lstmodel);
+        }
+        [HttpPost]
+        public ActionResult DailyDelivery(List<dailyDeliveryViewModel> model )
+        {
+            
+            return View(model);
+        }
     }
 }

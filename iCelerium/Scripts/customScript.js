@@ -1,5 +1,7 @@
 ﻿
 $(document).ready(function () {
+    
+
     $(function () {
         $(".Date,.datepicker,#searchDate").datepicker({dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date());
 
