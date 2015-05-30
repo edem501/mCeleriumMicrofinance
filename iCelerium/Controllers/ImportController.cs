@@ -4,7 +4,7 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using LinqToExcel;
+//using LinqToExcel;
 using System.Threading.Tasks;
 using iCelerium.Models.BodyClasses;
 using iCelerium.Models;
@@ -12,6 +12,7 @@ using iCelerium.Models;
 namespace iCelerium.Controllers
 {
     [Authorize(Roles = "Super Admin")]
+    [Audit]
     public class ImportController : Controller
     {
         private readonly SMSServersEntities db = new SMSServersEntities();
@@ -22,40 +23,40 @@ namespace iCelerium.Controllers
             return View();
         }
 
-        public ActionResult Agent()
-        {
-            if (Request.Files["fileupload1"].FileName.Length > 0)
-            {
-                string extension = System.IO.Path.GetExtension(Request.Files["FileUpload1"].FileName);
-                string path1 = string.Format("{0}/{1}", Server.MapPath("~/Content/UploadedFolder"), Request.Files["FileUpload1"].FileName);
-                if (System.IO.File.Exists(path1))
-                    System.IO.File.Delete(path1);
+        //public ActionResult Agent()
+        //{
+        //    if (Request.Files["fileupload1"].FileName.Length > 0)
+        //    {
+        //        string extension = System.IO.Path.GetExtension(Request.Files["FileUpload1"].FileName);
+        //        string path1 = string.Format("{0}/{1}", Server.MapPath("~/Content/UploadedFolder"), Request.Files["FileUpload1"].FileName);
+        //        if (System.IO.File.Exists(path1))
+        //            System.IO.File.Delete(path1);
 
-                Request.Files["FileUpload1"].SaveAs(path1);
-                var listofAgent = Importexcel(path1);
+        //        Request.Files["FileUpload1"].SaveAs(path1);
+        //        var listofAgent = Importexcel(path1);
 
-                foreach (var agt in listofAgent)
-                {
-                    var agent = new CreateAgentViewModels
-                    {
-                        AgentActif = false,
-                        AgentName = agt["Name"],
-                        AgentTel = agt["Telephone"]
-                    };
-                    var text = agt["Zone"];
-                    var zone = db.Zones.Where(z => z.ZoneName.Equals(text)).FirstOrDefault().ID;
+        //        foreach (var agt in listofAgent)
+        //        {
+        //            var agent = new CreateAgentViewModels
+        //            {
+        //                AgentActif = false,
+        //                AgentName = agt["Name"],
+        //                AgentTel = agt["Telephone"]
+        //            };
+        //            var text = agt["Zone"];
+        //            var zone = db.Zones.Where(z => z.ZoneName.Equals(text)).FirstOrDefault().ID;
 
-                    AddNewAgent(agent, zone.ToString());
-                }
-                return RedirectToAction("Index", "Agents");
-            }
-            else
-            {
-                return View();
-            }
+        //            AddNewAgent(agent, zone.ToString());
+        //        }
+        //        return RedirectToAction("Index", "Agents");
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
 
 
-        }
+        //}
         public ActionResult IMember()
         {
             IEnumerable<Commerciaux> cmx = db.Commerciauxes.OrderBy(c => c.AgentName).ToList();
@@ -68,44 +69,44 @@ namespace iCelerium.Controllers
             ViewBag.Agents = items;
             return View();
         }
-        public ActionResult Member(FormCollection frm)
-        {
-            var agentId = frm["Agents"].ToString();
+        //public ActionResult Member(FormCollection frm)
+        //{
+        //    var agentId = frm["Agents"].ToString();
 
-            if (Request.Files["fileupload1"].FileName.Length > 0)
-            {
-                string extension = System.IO.Path.GetExtension(Request.Files["FileUpload1"].FileName);
-                string path1 = string.Format("{0}/{1}", Server.MapPath("~/Content/UploadedFolder"), Request.Files["FileUpload1"].FileName);
-                if (System.IO.File.Exists(path1))
-                    System.IO.File.Delete(path1);
+        //    if (Request.Files["fileupload1"].FileName.Length > 0)
+        //    {
+        //        string extension = System.IO.Path.GetExtension(Request.Files["FileUpload1"].FileName);
+        //        string path1 = string.Format("{0}/{1}", Server.MapPath("~/Content/UploadedFolder"), Request.Files["FileUpload1"].FileName);
+        //        if (System.IO.File.Exists(path1))
+        //            System.IO.File.Delete(path1);
 
-                Request.Files["FileUpload1"].SaveAs(path1);
-                var listofAgent = Importexcel(path1);
-               
-                foreach (var agt in listofAgent)
-                {
-                    var client = new ClientsViewModel
-                       {
-                           ClientTel = agt["Telephone"],
-                           Mise = GetMise(agt["Mise"].Value.ToString()),
-                           Name = agt["Membre"],
-                           Sexe = agt["Sexe"],
-                           Solde = GetSolde(agt["Solde"].Value.ToString())
-                       };
-                    var text = agt["AgentName"];
-                    agentId = db.Commerciauxes.Where(c => c.AgentName.Equals(text)).FirstOrDefault().AgentId;
-                    AddNewClient(client, agentId);
-                }
-                return RedirectToAction("Index", "Clients");
-            }
-            else
-            {
-                return View();
-            }
+        //        Request.Files["FileUpload1"].SaveAs(path1);
+        //        var listofAgent = Importexcel(path1);
+
+        //        foreach (var agt in listofAgent)
+        //        {
+        //            var client = new ClientsViewModel
+        //               {
+        //                   ClientTel = agt["Telephone"],
+        //                   Mise = GetMise(agt["Mise"].Value.ToString()),
+        //                   Name = agt["Membre"],
+        //                   Sexe = agt["Sexe"],
+        //                   Solde = GetSolde(agt["Solde"].Value.ToString())
+        //               };
+        //            var text = agt["AgentName"];
+        //            agentId = db.Commerciauxes.Where(c => c.AgentName.Trim().Equals(text)).FirstOrDefault().AgentId;
+        //            AddNewClient(client, agentId);
+        //        }
+        //        return RedirectToAction("Index", "Clients");
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
 
 
-            return RedirectToAction("Index", "Agents");
-        }
+        //    return RedirectToAction("Index", "Agents");
+        //}
 
         public void AddNewAgent(CreateAgentViewModels agent, string Zones)
         {
@@ -181,15 +182,15 @@ namespace iCelerium.Controllers
             }
         }
 
-        public List<Row> Importexcel(string path)
-        {
+        //public List<Row> Importexcel(string path)
+        //{
 
-            var excel = new ExcelQueryFactory(path);
-            
-            var listofAgent = excel.Worksheet(0).ToList();
-            return listofAgent;
+        //    var excel = new ExcelQueryFactory(path);
 
-        }
+        //    var listofAgent = excel.Worksheet(0).ToList();
+        //    return listofAgent;
+
+        //}
         public Boolean AgentExist(string agentname)
         {
             if (db.Commerciauxes.Where(a => a.AgentName.ToUpper().Equals(agentname.ToUpper())).Count() > 0)

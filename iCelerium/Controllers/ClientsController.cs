@@ -133,8 +133,8 @@ namespace iCelerium.Controllers
             }
             else
             {
-                date1 = DateTime.ParseExact(startDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                date2 = DateTime.ParseExact(endDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                date1 = DateTime.ParseExact(startDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                date2 = DateTime.ParseExact(endDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
             }
             List<TransactionsViewModel> lstTrans = new List<TransactionsViewModel>();
             List<TTransaction> trans = new List<TTransaction>();

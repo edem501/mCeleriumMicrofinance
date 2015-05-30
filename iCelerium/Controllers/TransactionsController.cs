@@ -26,7 +26,7 @@ namespace iCelerium.Controllers
             IEnumerable<vTransaction> tran;
             if (!String.IsNullOrEmpty(searchDate))
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
                 if (!String.IsNullOrEmpty(agentModel))
@@ -111,13 +111,13 @@ namespace iCelerium.Controllers
             }
             if (String.IsNullOrEmpty(searchDate))
             {
-                searchDate = DateTime.Now.ToString("dd/MM/yyyy");
+                searchDate = DateTime.Now.ToString("dd-MM-yyyy");
             }
             ViewBag.agentModel = items;
             IEnumerable<vTransaction> tran ;
             if (!String.IsNullOrEmpty(searchDate))
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
                 if (!String.IsNullOrEmpty(agentModel))

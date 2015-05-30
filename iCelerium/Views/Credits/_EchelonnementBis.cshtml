@@ -1,0 +1,59 @@
+﻿
+@using iCelerium.Models.BodyClasses;
+@model List<echelon>
+<div id="PopUp">
+    <div class="row">
+        <p><h3>@ViewBag.Member</h3></p>
+        <p><b>Montant du Credit:</b> @ViewBag.Amount</p>
+        <p><b>Premier Payement:</b> @ViewBag.FirtPay</p>
+        <p><b>Payement Journaliere:</b> @ViewBag.SubPay</p>
+        <p><b>Date Debut du Payement:</b> @ViewBag.DateFirstPyt</p>
+
+    </div>
+    <div class="row">
+        <hr/>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().DateEcheance)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantCredit)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantPayable)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().MontantRestant)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (echelon item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.DateEcheance)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MontantCredit)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MontantPayable)</td>
+                        <td>@Html.DisplayFor(modelItem => item.MontantRestant)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @*<input type="button" class="btn btn-default" onclick="printElement(document.getElementById('myModal'))" value="Print" />*@
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function printElement(elem) {
+
+        var domClone = elem.cloneNode(true);
+
+        var $printSection = document.getElementById("printSection");
+
+        if (!$printSection) {
+            var $printSection = document.createElement("div");
+            $printSection.id = "printSection";
+            document.body.appendChild($printSection);
+        }
+
+        $printSection.innerHTML = "";
+        $printSection.appendChild(domClone);
+        window.print();
+    }
+
+</script>

@@ -6,11 +6,32 @@ using System.Web;
 
 namespace iCelerium.Models.BodyClasses
 {
+    public class dailyDeliveryViewModel
+    {
+        public int ID { get; set; }
+        public bool Enabled { get; set; }
+        [Display(Name="Nom Membre")]
+        public string ClientName { get; set; }
+        [Display(Name = "Mise")]
+        public double mise { get; set; }
+        [Display(Name = "Montant du Credit")]
+        public double MontantCredit { get; set; }
+        [Display(Name = "Solde")]
+        public double Solde { get; set; }
+        [Display(Name = "Livre?")]
+        public bool status { get; set; }
+        
+
+    }
     public class echelon
     {
+        [Display(Name="Date Echeance")]
         public DateTime DateEcheance { get; set; }
+        [Display(Name = "Montant du Credit")]
         public double MontantCredit { get; set; }
+        [Display(Name = "Montant Payable")]
         public double MontantPayable { get; set; }
+        [Display(Name = "Montant Restant")]
         public double MontantRestant { get; set; }
        
 

@@ -34,7 +34,7 @@ namespace iCelerium.Controllers
         //
         //Get: /Account/Edit
 
-        [Authorize(Roles = "Admin,Super Admin")]
+        [Authorize(Roles = "Super Admin")]
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
@@ -272,7 +272,7 @@ namespace iCelerium.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [Authorize(Roles = "Admin,Super Admin")]
+        [Authorize(Roles = "Super Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {

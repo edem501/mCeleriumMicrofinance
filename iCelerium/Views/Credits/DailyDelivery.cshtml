@@ -1,76 +1,113 @@
 ﻿@using iCelerium.Models.BodyClasses;
-@model List<dailyDeliveryViewModel>
+@using PagedList.Mvc;
+@model PagedList.IPagedList<dailyDeliveryViewModel>
 @{
-    ViewBag.Title = "DailyDelivery";
+    ViewBag.Title = "Livraison Journaliere";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h3><i class="fa fa-users"></i>@ViewBag.Title</h3><hr />
-@using (Html.BeginForm(new { @class = "form-horizontal", role = "form" }))
-            {
-    @Html.AntiForgeryToken()
+
+   
        <div class="row">
 
     <div class="col-md-12">
-        <div class="panel panel-info">
-            <table class="table table-striped">
-                <thead style=" font-weight:bold" class="alert-info">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.First().ClientName)
-                        </th>
-                        
-                        <th>
-                            @Html.DisplayNameFor(model => model.First().mise)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.First().Solde)
-                        </th>
-                       
-                        <th>
-                            @Html.DisplayNameFor(model => model.First().MontantCredit)
-                        </th>
+        
+@using (Html.BeginForm("DailyDelivery", "Credits", FormMethod.Post, new { encType = "multipart/form-data"}))
+{
+    <div class="panel panel-info">
+        <table class="table table-striped">
+            <thead style=" font-weight:bold" class="alert-info">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().ClientName)
+                    </th>
 
-                        <th>
-                            @Html.DisplayNameFor(model => model.First().status)
-                        </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().mise)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().Solde)
+                    </th>
 
-                       
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().MontantCredit)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.First().status)
+                    </th>
+
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() > 0)
+                {
+                    for (int i = 0; i < Model.Count(); i++)
                     {
-                        <tr>
+                        string lst;
+                        if (!Model[i].Enabled)
+                        {
+                            lst = "success";
+                        }
+                        else
+                        {
+                            lst = "danger";
+                        }
+                            
+                       
+                            
+                        
+                        <tr class=@lst>
+
                             <td>
-                                @Html.DisplayFor(modelItem => item.ClientName)
+                                @Html.DisplayFor(m => m[i].ClientName)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.mise)
+                                @Html.DisplayFor(m => m[i].mise)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Solde)
+                                @Html.DisplayFor(m => m[i].Solde)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.MontantCredit)
-                            </td>
-                           
-                            <td>
-                                @Html.CheckBoxFor(modelItem => item.status)
+                                @Html.DisplayFor(m => m[i].MontantCredit)
                             </td>
 
                             <td>
-                                <a href='@Url.Action("Transaction", "Clients", new { ClientId = item.ClientName })'> <i class="fa fa-bolt fa-fw fa-2x"></i></a>
+                                @if (Model[i].Enabled)
+                                {
+                                    @Html.CheckBoxFor(m => m[i].status, new { @disabled = "disabled" })
+                                }
+                                else
+                                {
+                                     @Html.CheckBoxFor(m => m[i].status)
+                                }
+                               
+                            </td>
 
+                            <td>
+                                @Html.HiddenFor(m => m[i].ID)
+                                @Html.HiddenFor(m => m[i].Enabled)
                             </td>
                         </tr>
                     }
-                </tbody>
-            </table>
-           
-        </div>
+                }
+               
+            </tbody>
+        </table>
+       
+    </div>
+    <div style="text-align:right;">
+        @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+
+        @Html.PagedListPager(Model, page => Url.Action("DailyDelivery", new { page, currentFilter = ViewBag.CurrentFilter }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+    </div>
+    if (Model.Count() > 0)
+    {
          <input type="submit" value="Livrer" class="btn btn-success" />
+    }
+}
     </div>
 </div>
-}

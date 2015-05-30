@@ -10,7 +10,7 @@ using iCelerium.Models;
 
 namespace iCelerium.Controllers
 {
-    [Authorize(Users = "Admin")]
+    [Authorize(Roles = "Super Admin")]
     [Audit]
     public class SettingsController : Controller
     {
@@ -38,8 +38,8 @@ namespace iCelerium.Controllers
             }
             else
             {
-                date1 = DateTime.ParseExact(startDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                date2 = DateTime.ParseExact(endDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                date1 = DateTime.ParseExact(startDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                date2 = DateTime.ParseExact(endDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
             }
             IEnumerable<AuditRecord> querry = await this.adb.AuditRecords.Where(x => x.Timestamp >= date1 && x.Timestamp < date2).OrderBy(x => x.Timestamp).ToListAsync();
             List<AuditViewModel> Vm = new List<AuditViewModel>();
@@ -60,7 +60,7 @@ namespace iCelerium.Controllers
 
             return this.View(Vm.ToPagedList(page ?? 1, 15));
         }
-
+        [Authorize(Roles = "Admin,Super Admin")]
         public async Task<ActionResult> AssigneAgent()
         {
             IEnumerable<Commerciaux> cmx = await adb.Commerciauxes.OrderBy(c => c.AgentName).ToListAsync();

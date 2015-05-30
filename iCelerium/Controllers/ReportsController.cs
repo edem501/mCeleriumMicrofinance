@@ -36,8 +36,8 @@ namespace iCelerium.Controllers
             IEnumerable<vTransaction> tran;
             if (!String.IsNullOrEmpty(searchDate) && !String.IsNullOrEmpty(searchDate1))
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                var chk1 = DateTime.ParseExact(searchDate1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                var chk1 = DateTime.ParseExact(searchDate1, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 this.ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
                
@@ -74,8 +74,8 @@ namespace iCelerium.Controllers
             IEnumerable<vTransaction> tran;
             if (!String.IsNullOrEmpty(searchDate) && !String.IsNullOrEmpty(searchDate1) && !String.IsNullOrEmpty(this.ViewBag.searchAgent))
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                var chk1 = DateTime.ParseExact(searchDate1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                var chk1 = DateTime.ParseExact(searchDate1, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 //ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
 
@@ -109,8 +109,8 @@ namespace iCelerium.Controllers
             IEnumerable<vTransaction> tran;
             if (!String.IsNullOrEmpty(searchDate) && !String.IsNullOrEmpty(searchDate1) && this.ViewBag.searchClient != null)
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                var chk1 = DateTime.ParseExact(searchDate1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                var chk1 = DateTime.ParseExact(searchDate1, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 //ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
                 var myId = this.db.Clients.Where(c => c.Id == searchClient).FirstOrDefault().Name;
@@ -135,8 +135,8 @@ namespace iCelerium.Controllers
             IEnumerable<vTransaction> tran;
             if (!String.IsNullOrEmpty(searchDate) && !String.IsNullOrEmpty(searchDate1))
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                var chk1 = DateTime.ParseExact(searchDate1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                var chk1 = DateTime.ParseExact(searchDate1, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 this.ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
 
@@ -172,8 +172,8 @@ namespace iCelerium.Controllers
             IEnumerable<vTransaction> tran;
             if (!String.IsNullOrEmpty(searchDate) && !String.IsNullOrEmpty(searchDate1) && !String.IsNullOrEmpty(this.ViewBag.searchAgent))
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                var chk1 = DateTime.ParseExact(searchDate1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                var chk1 = DateTime.ParseExact(searchDate1, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 //ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
 
@@ -207,8 +207,8 @@ namespace iCelerium.Controllers
             IEnumerable<vTransaction> tran;
             if (!String.IsNullOrEmpty(searchDate) && !String.IsNullOrEmpty(searchDate1) && this.ViewBag.searchClient != null)
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                var chk1 = DateTime.ParseExact(searchDate1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                var chk1 = DateTime.ParseExact(searchDate1, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 //ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
                 var myId = this.db.Clients.Where(c => c.Id == searchClient).FirstOrDefault().Name;
@@ -233,8 +233,8 @@ namespace iCelerium.Controllers
             IEnumerable<vTransaction> tran;
             if (!String.IsNullOrEmpty(searchDate) && !String.IsNullOrEmpty(searchDate1))
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                var chk1 = DateTime.ParseExact(searchDate1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                var chk1 = DateTime.ParseExact(searchDate1, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 this.ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
 
@@ -270,8 +270,8 @@ namespace iCelerium.Controllers
             IEnumerable<vTransaction> tran;
             if (!String.IsNullOrEmpty(searchDate) && !String.IsNullOrEmpty(searchDate1) && !String.IsNullOrEmpty(this.ViewBag.searchAgent))
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                var chk1 = DateTime.ParseExact(searchDate1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                var chk1 = DateTime.ParseExact(searchDate1, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 //ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
 
@@ -305,8 +305,8 @@ namespace iCelerium.Controllers
             IEnumerable<vTransaction> tran;
             if (!String.IsNullOrEmpty(searchDate) && !String.IsNullOrEmpty(searchDate1) && this.ViewBag.searchClient != null)
             {
-                var chk = DateTime.ParseExact(searchDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                var chk1 = DateTime.ParseExact(searchDate1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var chk = DateTime.ParseExact(searchDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                var chk1 = DateTime.ParseExact(searchDate1, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 //ViewBag.VBsearchDate = searchDate;
                 //var chk = searchDate;
                 var myId = this.db.Clients.Where(c => c.Id == searchClient).FirstOrDefault().Name;

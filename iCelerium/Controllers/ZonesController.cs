@@ -31,6 +31,7 @@ namespace iCelerium.Controllers
         }
 
         // GET: Zones/Create
+        [Authorize(Roles = "Admin,Super Admin")]
         public ActionResult Create()
         {
             return View();
@@ -66,6 +67,7 @@ namespace iCelerium.Controllers
         }
 
         // GET: Zones/Edit/5
+        [Authorize(Roles = "Admin,Super Admin")]
         public ActionResult Edit(int Id)
         {
             Zone zone = db.Zones.Find(Id);

@@ -1,0 +1,112 @@
+﻿@using iCelerium.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<ClientsViewModelCredit>
+@{
+    ViewBag.Title = "List des membres sous credit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3><i class="fa fa-users"></i>@ViewBag.Title</h3><hr />
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-info">
+            <table class="table table-striped">
+                <thead style=" font-weight:bold" class="alert-info">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().ClientId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Name)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Sexe)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().ClientTel)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Mise)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Solde)
+                        </th>
+
+                        
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClientId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Sexe)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ClientTel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Mise)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Solde)
+                            </td>
+
+
+                            <td>
+                                <a onclick="drop('@item.ClientId')" data-toggle="modal" data-target="#myModal"> <i class="fa fa-info fa-fw fa-2x"></i></a>
+                            </td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div style="text-align:right;">
+            @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+
+            @Html.PagedListPager(Model, page => Url.Action("ListOfCredit", new { page, currentFilter = ViewBag.CurrentFilter }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Echelonement du credit</h4>
+                    </div>
+                    <div class="modal-body" id="modBody">
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.4.min.js"></script>
+    <script>
+        function drop(clientID) {
+            
+            $("#modBody").load('/Credits/_EchelonnementBis?ClientID=' + clientID);
+
+            $("#myModal").dialog("open");
+
+        }
+
+    </script>
+}

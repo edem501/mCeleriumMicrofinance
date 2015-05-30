@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using iCelerium.Models;
 using iCelerium.Models.BodyClasses;
 using System.Threading.Tasks;
+using PagedList;
 
 
 namespace iCelerium.Controllers
@@ -35,13 +36,13 @@ namespace iCelerium.Controllers
         }
         public ActionResult Create()
         {
-            List<Echeance> lstech =  db.Echeances.OrderBy(c => c.EcheanceName).ToList();
+            List<Echeance> lstech = db.Echeances.OrderBy(c => c.EcheanceName).ToList();
             List<SelectListItem> items = new List<SelectListItem>();
             foreach (Echeance ech in lstech)
             {
                 items.Add(new SelectListItem { Text = ech.EcheanceName.ToUpper(), Value = ech.EcheanceID.ToString() });
             }
-           
+
 
             ViewBag.EcheancesID = items;
             return View();
@@ -53,7 +54,7 @@ namespace iCelerium.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 int ID = 0;
                 if (db.CreditTypes.Count() > 0)
                 {
@@ -61,14 +62,14 @@ namespace iCelerium.Controllers
                 }
                 db.CreditTypes.Add(new CreditType
                 {
-                    Duration=model.Duration,
-                    EcheanceID=model.EcheancesID,
-                    InterestRate=model.InterestRate,
-                    TypeName=model.TypeName,
+                    Duration = model.Duration,
+                    EcheanceID = model.EcheancesID,
+                    InterestRate = model.InterestRate,
+                    TypeName = model.TypeName,
                     TypeID = string.Format("C{0}", (ID + 1).ToString().PadLeft(3, '0'))
                 });
                 db.SaveChanges();
-               return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             else
             {
@@ -94,14 +95,14 @@ namespace iCelerium.Controllers
             }
             else
             {
-                Client client = db.Clients.Where(c=>c.ClientId.Equals(clientID)).FirstOrDefault();
+                Client client = db.Clients.Where(c => c.ClientId.Equals(clientID)).FirstOrDefault();
                 if (clientID == null)
                 {
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    List<CreditType> lstech = db.CreditTypes.OrderBy(c=>c.TypeName).ToList();
+                    List<CreditType> lstech = db.CreditTypes.OrderBy(c => c.TypeName).ToList();
                     List<SelectListItem> items = new List<SelectListItem>();
                     foreach (CreditType ech in lstech)
                     {
@@ -114,9 +115,9 @@ namespace iCelerium.Controllers
                     ViewBag.SubTitle = client.Name;
                     return View();
                 }
-                
+
             }
-            
+
         }
 
         public ActionResult _Echelonnement(string TypeID, decimal Amount, DateTime DateFirstPyt)
@@ -138,7 +139,7 @@ namespace iCelerium.Controllers
             {
                 decimal pyt = 0;
                 ;
-                if(i==0)
+                if (i == 0)
                 {
                     pyt = Math.Round(FirtPay, 2);
                 }
@@ -147,54 +148,203 @@ namespace iCelerium.Controllers
                     pyt = SubPay;
                 }
 
-               
+
                 lstEche.Add(new echelon
                 {
-                    DateEcheance=dte.AddDays(i),
-                    MontantCredit=Convert.ToDouble(montant),
-                    MontantPayable=Convert.ToDouble(pyt),
-                    MontantRestant=Convert.ToDouble(montant-pyt)
+                    DateEcheance = dte.AddDays(i),
+                    MontantCredit = Convert.ToDouble(montant),
+                    MontantPayable = Convert.ToDouble(pyt),
+                    MontantRestant = Convert.ToDouble(montant - pyt)
                 });
                 //dte = dte.AddDays(1);
                 montant = montant - pyt;
             }
 
-            ViewBag.TypeID = Math.Round(TotalPayable,2);
-            ViewBag.FirtPay =Math.Round(FirtPay,2);
-            ViewBag.SubPay = Math.Round(SubPay,2);
+            ViewBag.TypeID = Math.Round(TotalPayable, 2);
+            ViewBag.FirtPay = Math.Round(FirtPay, 2);
+            ViewBag.SubPay = Math.Round(SubPay, 2);
             ViewBag.Amount = Amount;
             ViewBag.DateFirstPyt = DateFirstPyt;
 
             return PartialView(lstEche);
         }
 
-        public ActionResult DailyDelivery()
+        public ActionResult _EchelonnementBis(string ClientID)
+        {
+            Client client = db.Clients.Where(c => c.ClientId.Equals(ClientID)).FirstOrDefault();
+            Credit credit = db.Credits.Where(c => c.ClientID.Equals(ClientID)).OrderByDescending(d => d.DateCreated).First();
+            
+            int Dur = 31;
+            decimal TotalPayable = Convert.ToDecimal( 31 * client.Mise.Value);
+            decimal rest = Convert.ToDecimal(TotalPayable % Dur);
+            decimal SubPay = Convert.ToDecimal((TotalPayable - rest) / Dur);
+            decimal FirtPay = Convert.ToDecimal(SubPay + rest);
+
+            List<echelon> lstEche = new List<echelon>();
+            decimal montant = TotalPayable;
+            DateTime dte = credit.DateFirstPyt;
+
+            for (int i = 0; i < Dur; i++)
+            {
+                decimal pyt = 0;
+                ;
+                if (i == 0)
+                {
+                    pyt = Math.Round(FirtPay, 2);
+                }
+                else
+                {
+                    pyt = SubPay;
+                }
+
+
+                lstEche.Add(new echelon
+                {
+                    DateEcheance = dte.AddDays(i),
+                    MontantCredit = Convert.ToDouble(montant),
+                    MontantPayable = Convert.ToDouble(pyt),
+                    MontantRestant = Convert.ToDouble(montant - pyt)
+                });
+                //dte = dte.AddDays(1);
+                montant = montant - pyt;
+            }
+
+            ViewBag.TypeID = Math.Round(TotalPayable, 2);
+            ViewBag.FirtPay = Math.Round(FirtPay, 2);
+            ViewBag.SubPay = Math.Round(SubPay, 2);
+            ViewBag.Amount = credit.Amount;
+            ViewBag.DateFirstPyt = credit.DateFirstPyt;
+            ViewBag.Member = client.Name;
+
+            return PartialView(lstEche);
+        }
+
+        public ActionResult DailyDelivery(int? page)
         {
             DateTime date = new DateTime();
             date = DateTime.Today.AddDays(-10);
-            List<Credit> lstCredits = db.Credits.Where(c => c.status == false & c.DateCreated < date).ToList();
+            List<Credit> lstCredits = db.Credits.Where(c => c.status == false & c.DateCreated <= date).ToList();
             List<dailyDeliveryViewModel> lstmodel = new List<dailyDeliveryViewModel>();
             foreach (Credit dvml in lstCredits)
             {
                 Client client = db.Clients.Where(c => c.ClientId.Equals(dvml.ClientID)).FirstOrDefault();
+                bool enaable;
+                if (client.Solde >= client.Mise.Value * 10)
+                {
+                    enaable = false;
+                }
+                else
+                {
+                    enaable = true;
+                }
                 lstmodel.Add(new dailyDeliveryViewModel
                 {
-                    ClientName=client.Name,
-                    mise=client.Mise.Value,
-                    MontantCredit= dvml.Amount,
-                    Solde=client.Solde.Value,
-                    status=dvml.status
+                    ClientName = client.Name,
+                    mise = client.Mise.Value,
+                    MontantCredit = dvml.Amount,
+                    Solde = client.Solde.Value,
+                    status = dvml.status,
+                    ID = dvml.ID,
+                    Enabled=enaable
                 });
             }
 
-
-            return View(lstmodel);
+            int pageSize = 30;
+            int pageNumber = (page ?? 1);
+            return View(lstmodel.ToPagedList(pageNumber, pageSize));
+            
         }
         [HttpPost]
-        public ActionResult DailyDelivery(List<dailyDeliveryViewModel> model )
+        public ActionResult DailyDelivery(List<dailyDeliveryViewModel> model)
         {
-            
-            return View(model);
+            if (ModelState.IsValid)
+            {
+
+
+
+                foreach (dailyDeliveryViewModel dvml in model)
+                {
+                    if (dvml.status == true)
+                    {
+                        Credit cr = db.Credits.Find(dvml.ID);
+                        cr.DateDisbursed = DateTime.Now;
+                        cr.status = true;
+
+                        Client client = db.Clients.Where(c => c.ClientId.Equals(cr.ClientID)).FirstOrDefault();
+
+
+                        TTransaction trans = new TTransaction
+                        {
+                            AgentId = db.Commerciauxes.Where(c=>c.AgentName.ToLower().Equals("system")).FirstOrDefault().AgentId,
+                            ClientId = client.ClientId,
+                            Credit = 0,
+                            Debit = client.Mise.Value * 31,
+                            Description = 0,
+                            Posted = false,
+                            SoldeFermeture = client.Solde.Value - client.Mise.Value * 31,
+                            SoldeOuverture = client.Solde.Value,
+                            DateOperation = DateTime.Now
+
+                        };
+
+                        client.Solde = client.Solde.Value - client.Mise.Value * 31;
+
+                        db.TTransactions.Add(trans);
+                        db.SaveChanges();
+                    }
+                }
+
+            }
+            return RedirectToAction("DailyDelivery");
+        }
+
+        public ActionResult ListOfCredit(int? page)
+        {
+            List<Client> lstClient = db.Clients.Where(c => c.Solde < 0).ToList();
+            List<ClientsViewModelCredit> model = new List<ClientsViewModelCredit>();
+
+            foreach (Client cl in lstClient)
+            {
+                model.Add(new ClientsViewModelCredit
+                {
+                    ClientId=cl.ClientId,
+                    ClientTel=cl.ClientTel,
+                    Mise=cl.Mise.Value,
+                    Name=cl.Name,
+                    Sexe=cl.Sexe,
+                    Solde = string.Format("({0})", cl.Solde.Value * (-1))
+                });
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(model.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult ListOfSavings(int? page)
+        {
+            List<Client> lstClient = db.Clients.Where(c => c.Solde > 0).ToList();
+            List<ClientsViewModel> model = new List<ClientsViewModel>();
+
+            foreach (Client cl in lstClient)
+            {
+                model.Add(new ClientsViewModel
+                {
+                    ClientId = cl.ClientId,
+                    ClientTel = cl.ClientTel,
+                    Mise = cl.Mise.Value,
+                    Name = cl.Name,
+                    Sexe = cl.Sexe,
+                    Solde =  cl.Solde.Value
+                });
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(model.ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult PrintOutList()
+        {
+            return View();
         }
     }
 }

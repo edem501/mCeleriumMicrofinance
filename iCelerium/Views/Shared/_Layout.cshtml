@@ -16,6 +16,7 @@
     @*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>*@
+    <link rel="icon" href="favicon.ico">
     <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")"></script>
     <script src="@Url.Content("~/Scripts/Highcharts-4.0.1/js/highcharts-all.js")"></script>
@@ -47,10 +48,24 @@
                 <ul class="nav navbar-nav">
                     @if (HttpContext.Current.User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink(@iCelerium.Views.Strings.Home, "Index", "Home", null, null)</li>
-                    <li>@Html.ActionLink(@iCelerium.Views.Strings.Reports, "Index", "Reports")</li>
+                        <li>@Html.ActionLink(@iCelerium.Views.Strings.Home.ToUpper(), "Index", "Home", null, null)</li>
+                    <li>@Html.ActionLink(@iCelerium.Views.Strings.Reports.ToUpper(), "Index", "Reports")</li>
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Importer<span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">TIM-AGRO<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+            <li class="dropdown-backdrop">
+                <a>@iCelerium.Views.Strings.Agents</a>
+
+            </li>
+            <li>@Html.ActionLink("Livraison Journaliere", "DailyDelivery", "Credits", null, null)</li>
+            <li class="divider"></li>
+            <li><a href='@Url.Action("ListOfCredit", "Credits")'>List Membres Sous Credit</a></li>
+            <li class="divider"></li>
+            <li><a href='@Url.Action("ListOfSavings", "Credits")'>List Membres Sous Epargne</a></li>
+        </ul>
+    </li>
+    @*<li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">IMPORTER<span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
             <li class="dropdown-backdrop">
                 <a>@iCelerium.Views.Strings.Agents</a>
@@ -59,12 +74,11 @@
             <li>@Html.ActionLink("Importer Agent", "IAgent", "Import", null, null)</li>
             <li class="divider"></li>
             <li><a href='@Url.Action("IMember", "Import")'>Importer Membre</a></li>
-           
-        </ul>
-    </li>
 
+        </ul>
+    </li>*@
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration<span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">ADMINISTRATION<span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
             <li class="dropdown-backdrop">
                 <a>@iCelerium.Views.Strings.Agents</a>

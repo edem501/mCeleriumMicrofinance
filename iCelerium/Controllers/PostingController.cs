@@ -10,7 +10,8 @@ using iCelerium.Models.BodyClasses;
 
 namespace iCelerium.Controllers
 {
-    [Authorize(Roles = "Utilisateur,Admin,Super Admin")]
+    [Authorize(Roles = "Admin,Super Admin")]
+    [Audit]
     public class PostingController : Controller
     {
         public readonly SMSServersEntities db = new SMSServersEntities();
@@ -47,7 +48,44 @@ namespace iCelerium.Controllers
             return View();
 
         }
-
+        [HttpPost]
+        public ActionResult Manual(ManualEntriesViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TTransaction transaction = new TTransaction();
+                Client client = db.Clients.Where(c => c.ClientId.Equals(model.clientID)).FirstOrDefault();
+                db.TTransactions.Add(new TTransaction
+                {
+                    AgentId=model.AgentID,
+                    ClientId=model.clientID,
+                    Credit=model.Amount,
+                    DateOperation=DateTime.Now,
+                    Debit=0,
+                    Description=0,
+                    Posted=false,
+                    SoldeFermeture=client.Solde.Value + model.Amount,
+                    SoldeOuverture=client.Solde.Value
+                  
+                });
+                db.SaveChanges();
+                var lstAgent = db.Commerciauxes.ToList();
+                List<SelectListItem> AgentsList = new List<SelectListItem>();
+                List<SelectListItem> lstClient = new List<SelectListItem>();
+                foreach (Commerciaux cmx in lstAgent)
+                {
+                    AgentsList.Add(new SelectListItem { Text = cmx.AgentName, Value = cmx.AgentId.ToString() });
+                }
+                ViewBag.AgentsList = AgentsList;
+                ViewBag.lstClient = lstClient;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Home");
+            }
+            
+        }
         //
         // GET: /Posting/
         public async Task<ActionResult> Index(string startDate, string endDate)
@@ -69,8 +107,8 @@ namespace iCelerium.Controllers
             }
             else
             {
-                date1 = DateTime.ParseExact(startDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                date2 = DateTime.ParseExact(endDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                date1 = DateTime.ParseExact(startDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                date2 = DateTime.ParseExact(endDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
             }
              
             IEnumerable<spToBeValidated_Result> toPostList = this.db.spToBeValidated(date1, date2);
@@ -92,7 +130,9 @@ namespace iCelerium.Controllers
             {
                 agentName = this.db.Commerciauxes.Where(c => c.AgentId == agentId).FirstOrDefault().AgentName,
                 Live = this.GetLive(agentId, sDate, eDate),
-                Upload = this.GetUploaded(agentId, sDate, eDate)
+                //Upload = this.GetUploaded(agentId, sDate, eDate)
+                //Offline.......................................
+                Upload = this.GetLive(agentId, sDate, eDate)
             };
             var querry = this.db.TTransactions.Where(c => c.AgentId == agentId && c.DateOperation >= sDate && c.DateOperation < eDate);
             List<int> TransIDs = new List<int>();

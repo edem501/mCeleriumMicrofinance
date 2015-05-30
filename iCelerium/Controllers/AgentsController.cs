@@ -130,7 +130,7 @@ namespace iCelerium.Controllers
         }
 
         // GET: /Agents/Create
-        [Authorize(Roles = "Admin,Super Admin")]
+        [Authorize(Roles = "Super Admin")]
         public async Task<ActionResult> Create()
         {
             IEnumerable<Zone> cmx = await this.db.Zones.OrderBy(c => c.ZoneName).ToListAsync();
@@ -192,7 +192,7 @@ namespace iCelerium.Controllers
         }
 
         // GET: /Agents/Edit/5
-        [Authorize(Roles = "Admin,Super Admin")]
+        [Authorize(Roles = "Super Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
