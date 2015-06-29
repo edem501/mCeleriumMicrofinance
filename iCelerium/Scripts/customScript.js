@@ -1,9 +1,9 @@
 ﻿
 $(document).ready(function () {
-    
+
 
     $(function () {
-        $(".Date,.datepicker,#searchDate").datepicker({dateFormat: 'dd-mm-yy'}).datepicker("setDate", new Date());
+        $(".Date,.datepicker,#searchDate").datepicker({ dateFormat: 'dd-mm-yy' }).datepicker("setDate", new Date());
 
         $.datepicker.regional['fr'] = {
             clearText: 'Effacer', clearStatus: '',
@@ -57,4 +57,5 @@ $(document).ready(function () {
         };
         $.datepicker.setDefaults($.datepicker.regional['fr']);
     });
+   
 });

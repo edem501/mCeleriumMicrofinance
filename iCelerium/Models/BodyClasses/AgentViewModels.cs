@@ -30,7 +30,7 @@ namespace iCelerium.Models.BodyClasses
              ErrorMessageResourceName = "Required")]
         public string AgentTel { get; set; }
     }
-    public class AgentListView:ICommerciaux
+    public class AgentListView
     {
         public int Id { get; set; }
         [Display(Name = "AgentNumber", ResourceType = typeof(iCelerium.Views.Strings))]
@@ -39,9 +39,10 @@ namespace iCelerium.Models.BodyClasses
         public string AgentName { get; set; }
           [Display(Name = "Activated", ResourceType = typeof(iCelerium.Views.Strings))]
    
-        public bool AgentActif { get; set; }
+        public string AgentActif { get; set; }
         [Display(Name = "Telephone")]
         public string AgentTel { get; set; }
+        public string link { get; set; }
     }
     public class EditAgentViewModels
     {
@@ -72,8 +73,11 @@ namespace iCelerium.Models.BodyClasses
 
     public class AgentClientsModel
     {
-        public string AgentName { get; set; }
-        public List<Client> Membres { get; set; }
+       
+        public Nullable<double> Mise { get; set; }
+        public Nullable<double> Solde { get; set; }
+        public string NameID { get; set; }
+        public string link { get; set; }
 
     }
 

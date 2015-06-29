@@ -1,113 +1,188 @@
 ﻿@using iCelerium.Models.BodyClasses;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<dailyDeliveryViewModel>
+@model List<dailyDeliveryViewModel>
 @{
     ViewBag.Title = "Livraison Journaliere";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h3><i class="fa fa-users"></i>@ViewBag.Title</h3><hr />
+<div class="row">
+    @using (Html.BeginForm("DailyDelivery", "Credits", new { AgentID = ViewBag.AgentID }, FormMethod.Get))
+    {
 
-   
-       <div class="row">
+        <div class="col-md-3">
+
+            @*<div class="form-group">
+                    <div class="input-group ">
+                        <span class="input-group-addon "><i class="fa fa-calendar bigger-110"></i></span>
+                        @Html.TextBox("startDate", null, new { @class = "form-control date-picker Date" })
+
+                    </div>
+                </div>*@
+
+        </div>
+        <div class="col-md-3">
+
+            @*<div class="form-group">
+                    <div class="input-group ">
+                        <span class="input-group-addon "><i class="fa fa-calendar bigger-110"></i></span>
+                        @Html.TextBox("endDate", null, new { @class = "form-control date-picker Date2" })
+
+                    </div>
+                </div>*@
+
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+
+                <div class="input-group ">
+                    <span class="input-group-addon"><i class="fa fa-user bigger-110"></i></span>
+                    @Html.DropDownList("AgentID", null, @iCelerium.Views.Strings.Agents, new { @class = "form-control dropdown", id = "MyForm" })
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <input type="submit" value="Go" class="btn btn-success" />
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row">
 
     <div class="col-md-12">
-        
-@using (Html.BeginForm("DailyDelivery", "Credits", FormMethod.Post, new { encType = "multipart/form-data"}))
-{
-    <div class="panel panel-info">
-        <table class="table table-striped">
-            <thead style=" font-weight:bold" class="alert-info">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().ClientName)
-                    </th>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().mise)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().Solde)
-                    </th>
+        <div class="panel panel-info">
+            @using (Html.BeginForm("DailyDelivery", "Credits", FormMethod.Post, new { encType = "multipart/form-data" }))
+            {
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().MontantCredit)
-                    </th>
+                <table class="table table-striped table-condensed dataTable DataTable">
+                    <thead style=" font-weight:bold" class="alert-info">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().ClientName)
+                            </th>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().status)
-                    </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().mise)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().Solde)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().MontantCredit)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.First().status)
+                            </th>
 
 
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Count() > 0)
-                {
-                    for (int i = 0; i < Model.Count(); i++)
-                    {
-                        string lst;
-                        if (!Model[i].Enabled)
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() > 0)
                         {
-                            lst = "success";
-                        }
-                        else
-                        {
-                            lst = "danger";
-                        }
-                            
-                       
-                            
-                        
-                        <tr class=@lst>
-
-                            <td>
-                                @Html.DisplayFor(m => m[i].ClientName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m[i].mise)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m[i].Solde)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m[i].MontantCredit)
-                            </td>
-
-                            <td>
-                                @if (Model[i].Enabled)
+                            for (int i = 0; i < Model.Count(); i++)
+                            {
+                                string lst;
+                                if (!Model[i].Enabled)
                                 {
-                                    @Html.CheckBoxFor(m => m[i].status, new { @disabled = "disabled" })
+                                    lst = "success";
                                 }
                                 else
                                 {
-                                     @Html.CheckBoxFor(m => m[i].status)
+                                    lst = "danger";
                                 }
-                               
-                            </td>
 
-                            <td>
-                                @Html.HiddenFor(m => m[i].ID)
-                                @Html.HiddenFor(m => m[i].Enabled)
-                            </td>
-                        </tr>
-                    }
+
+
+
+                                <tr class=@lst>
+
+                                    <td>
+                                        @Html.DisplayFor(m => m[i].ClientName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => m[i].mise)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => m[i].Solde)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => m[i].MontantCredit)
+                                    </td>
+
+                                    <td>
+                                        @if (Model[i].Enabled)
+                                        {
+                                            @Html.CheckBoxFor(m => m[i].status, new { @disabled = "disabled" })
+                                        }
+                                        else
+                                        {
+                                            @Html.CheckBoxFor(m => m[i].status)
+                                        }
+
+                                    </td>
+
+                                    <td>
+                                        @Html.HiddenFor(m => m[i].ID)
+                                        @Html.HiddenFor(m => m[i].Enabled)
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+                <input type="hidden" id="dataTableFiltered">
+                if (Model.Count() > 0)
+                {
+                    <input type="submit" value="Livrer" class="btn btn-success" />
                 }
-               
-            </tbody>
-        </table>
-       
-    </div>
-    <div style="text-align:right;">
-        @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
-
-        @Html.PagedListPager(Model, page => Url.Action("DailyDelivery", new { page, currentFilter = ViewBag.CurrentFilter }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
-    </div>
-    if (Model.Count() > 0)
-    {
-         <input type="submit" value="Livrer" class="btn btn-success" />
-    }
-}
+            }
+            @*<button>Click me!</button>*@
+        </div>
     </div>
 </div>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function (){
+        $('.DataTable').DataTable(
+                             {
+                                 "language": {
+                                     "lengthMenu": "Projection _MENU_ records par page",
+                                     "zeroRecords": "Pas de donnee - Desole!!",
+                                     "info": "Projection page _PAGE_ de _PAGES_",
+                                     "infoEmpty": "Pas de donne a afficher. Desole!!",
+                                     "infoFiltered": "(filtre de _MAX_ total records)",
+                                     "search": "<i class='fa fa-search'></i>",
+                                     "searchPlaceholder": "Filtrer"
+                                 },
+                                 "iDisplayLength":"25"
+                             });
+        @*$('button').click(function () {
+            var table = $('.DataTable').DataTable();
+            var data = table
+            .rows()
+            .data();
+            $.ajax({
+                url: '@Url.Action("Checkme", "Credits", new  { @data})',
+                type: "GET",
+                data: JSON.stringify(),
+                dataType: "json",
+                traditional: true,
+                contentType: "application/json; charset=utf-8"
+            });
+
+        });*@
+        $('#DailyDelivery').submit(function () {
+            $('#dataTableFiltered').val(JSON.stringify(oTable._('tr', { "page": "all" })));
+        });
+    });
+
+
+</script>

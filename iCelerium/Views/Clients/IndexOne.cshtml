@@ -1,19 +1,18 @@
-﻿@using PagedList.Mvc;
-@model PagedList.IPagedList<iCelerium.Models.ClientsViewModel>
-
-
+﻿@using iCelerium.Models;
+@model List<ClientsViewModel>
 @{
-    ViewBag.Title = iCelerium.Views.Strings.Members;
+    ViewBag.Title = "IndexOne";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3><i class="fa fa-users text-success"></i><span class="text-success">@ViewBag.Title</span></h3><hr />
+<h2>IndexOne</h2>
 
 <div class="row">
 
     <div class="col-md-12">
-        <div class="panel panel-success">
-            <table class="table table-striped DataTable dataTable">
-                <thead style=" font-weight:bold" class="alert-success">
+        <div class="panel panel-info">
+            <table class="table table-striped DataTable dataTable" >
+                <thead style=" font-weight:bold" class="alert-info">
                     <tr>
                         <th>
                             @Html.DisplayNameFor(model => model.First().ClientId)
@@ -38,17 +37,17 @@
                         <th></th>
                     </tr>
                 </thead>
-
+               
             </table>
 
         </div>
-
+        
 
     </div>
 </div>
 <script type="text/javascript" language="javascript">
     $.ajax({
-        url: "/Clients/GetIndex",
+        url: "/Clients/GetData",
         type: "POST",
         data: JSON.stringify(),
         dataType: "json",
@@ -64,11 +63,9 @@
                                  "zeroRecords": "Pas de donnee - Desole!!",
                                  "info": "Projection page _PAGE_ de _PAGES_",
                                  "infoEmpty": "Pas de donne a afficher. Desole!!",
-                                 "infoFiltered": "(filtered from _MAX_ total records)",
-                                 "search": "<i class='fa fa-search'></i>",
-                                 "searchPlaceholder": "Filtrer"
+                                 "infoFiltered": "(filtered from _MAX_ total records)"
                              },
-                             "ajax": "/Clients/GetIndex",
+                             "ajax": "/Clients/GetData",
                              "columns": [
                                  { "data": "ClientId" },
                                   { "data": "Name" },

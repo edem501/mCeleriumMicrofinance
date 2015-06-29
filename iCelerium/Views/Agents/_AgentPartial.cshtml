@@ -1,9 +1,7 @@
 ﻿@model PagedList.IPagedList<iCelerium.Models.Commerciaux>
 @using PagedList.Mvc;
 
-<hr />
 
-@Html.ActionLink("Ajouter Nouveau", "Create", null, new { @class = "btn btn-primary" })
 <table class="table table-striped">
     <thead>
         <tr>
@@ -49,9 +47,4 @@
         }
     </tbody>
 </table>
-<div style="text-align:right;">
-    @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
 
-    @Html.PagedListPager(Model, page => Url.Action("Simple", new { page, currentFilter = ViewBag.CurrentFilter }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
-
-</div>

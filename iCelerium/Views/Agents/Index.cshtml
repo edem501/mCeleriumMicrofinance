@@ -3,42 +3,18 @@
 
 
 @{
-    ViewBag.Title =iCelerium.Views.Strings.Agents;
+    ViewBag.Title = iCelerium.Views.Strings.Agents;
 }
-<h3><i class="fa fa-users"></i>@ViewBag.Title</h3><hr />
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-4">
-            <div class="input-group col-md-1">
-                @Html.ActionLink(@iCelerium.Views.Strings.CreateNew, "Create", null, new { @class = "form-control btn btn-success" })
-                <span class="input-group-addon"><i class="fa fa-plus-circle"></i></span>
-            </div>
-      
-        </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            @using (Html.BeginForm("Index", "Agents", FormMethod.Get))
-            {
-                <div class="form-group input-group ">
-                    <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
-                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = @iCelerium.Views.Strings.Search })
-
-                </div>
-            }
-    </div>
-        
-    </div>
-</div>
-
+<h3><span class="text-info"><i class="fa fa-users"></i>@ViewBag.Title</span></h3><hr />
 
 <div class="row">
 
     <div class="col-md-12">
         <div class="panel panel-info">
-            
-            <table class="table table-striped ">
+
+            <table class="table table-condensed table-striped DataTable dataTable">
                 <thead style=" font-weight:bold" class="alert-info">
-                    <tr>
+                    <tr >
                         <th>
                             @Html.DisplayNameFor(model => model.First().AgentId)
                         </th>
@@ -51,63 +27,59 @@
                         <th>
                             @Html.DisplayNameFor(model => model.First().AgentActif)
                         </th>
-                        <th></th>
+                       
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AgentId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AgentName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AgentTel)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AgentActif)
-                            </td>
-                            <td>
-                                <a href='@Url.Action("AgentAssign", "Agents", new { agentID = item.AgentId })'> <i class="fa fa-info fa-fw fa-2x"></i></a>
 
-                            </td>
-                            <td>
-                                <a href='@Url.Action("Edit", "Agents", new { id = item.Id })'> <i class="fa fa-edit fa-fw fa-2x"></i></a>
-
-                            </td>
-                        </tr>
-                    }
-                </tbody>
             </table>
         </div>
-            <div style="text-align:right;">
-                @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
-
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
-            </div>
-          
-        </div>
     </div>
-@{
-    if (TempData["Message"] != null)
-    {
-         <div id="dialog" title="Message" class="alert-info">
-             @TempData["Message"]
-        </div>
-    }
-   
-}
+</div>
 
-<script>
+<script type="text/javascript" language="javascript">
+    $.ajax({
+        url: "/Agents/GetIndex",
+        type: "POST",
+        data: JSON.stringify(),
+        dataType: "json",
+        traditional: true,
+        contentType: "application/json; charset=utf-8",
+        success: function (Jdata) {
+            if (Jdata != null) {
 
-    $("#dialog").dialog({
-        modal: true,
-        autoOpen: true
-        
+                $('.DataTable').DataTable(
+                         {
+                             "language": {
+                                 "lengthMenu": "Projection _MENU_ records par page",
+                                 "zeroRecords": "Pas de donnee - Desole!!",
+                                 "info": "Projection page _PAGE_ de _PAGES_",
+                                 "infoEmpty": "Pas de donne a afficher. Desole!!",
+                                 "infoFiltered": "(filtre de _MAX_ total records)",
+                                 "search": "<a href='/Agents/Create' class='btn btn-success'><i class='fa fa-plus'></i>Ajouter Nouveau</a>   <i class='fa fa-search'></i>",
+                                 "searchPlaceholder": "Filtrer"
+                             },
+                             "ajax": "/Agents/GetIndex",
+                             "columns": [
+                                 { "data": "AgentId" },
+                                  { "data": "AgentName" },
+                                   { "data": "AgentTel" },
+                                    { "data": "AgentActif" },
+                                      {
+                                          "data": "link", "bSortable": false
+                                      }
+                             ]
+                         });
+
+
+            }
+            else {
+                alert("Error occurs on the Database level!");
+            }
+        },
+        error: function () {
+            alert("An error has occured!!!");
+        }
     });
-</script>
 
+</script>

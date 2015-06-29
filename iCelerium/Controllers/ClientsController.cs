@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using iCelerium.Models;
 using iCelerium.Models.BodyClasses;
 using PagedList;
-using Microsoft.Reporting.WebForms;
 using System.IO;
 namespace iCelerium.Controllers
 {
@@ -20,50 +19,35 @@ namespace iCelerium.Controllers
         private readonly SMSServersEntities db = new SMSServersEntities();
 
         // GET: /Clients/
-        public async Task<ActionResult> Index(string currentFilter, string searchString, int? page)
+        public async Task<ActionResult> Index()
         {
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
+            return View();
+        }
+        public async Task<JsonResult> GetIndex()
+        {
 
-            this.ViewBag.CurrentFilter = searchString;
-
-
-            IEnumerable<Client> clientList;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                clientList = await this.db.Clients.Where(c => c.Name.ToUpper().Contains(searchString.ToUpper())).ToListAsync();
-            }
-            else
-            {
-                clientList = await this.db.Clients.ToListAsync();
-            }
-
+            IEnumerable<Client> clientList = await this.db.Clients.ToListAsync();
             List<ClientsViewModel> model = new List<ClientsViewModel>();
             foreach (Client cmx in clientList)
             {
                 model.Add(new ClientsViewModel
                 {
-                    ClientId =cmx.ClientId,
+                    ClientId = cmx.ClientId,
                     ClientTel = cmx.ClientTel,
-                    Mise =(double)cmx.Mise,
+                    Mise = (double)cmx.Mise,
                     Name = cmx.Name,
                     Sexe = cmx.Sexe,
-                    Solde = (double)cmx.Solde
-                    });
+                    Solde = (double)cmx.Solde,
+                    link = string.Format("<a href='/Clients/Details?ClientId={0}'> <i class='fa fa-info-circle fa-fw fa-2x'></i></a>" +
+                                         "<a href='/Clients/Edit?ClientId={0}'> <i class='fa fa-edit fa-fw fa-2x'></i></a>" +
+                                         "<a href='/Clients/Transaction?ClientId={0}'> <i class='fa fa-bolt fa-fw fa-2x'></i></a>"
+                                        , cmx.ClientId)
+                });
             }
-
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return this.View(model.ToPagedList(pageNumber, pageSize));
+            jess jess = new jess();
+            jess.data = model;
+            return Json(jess, JsonRequestBehavior.AllowGet);
         }
-
         // GET: /Clients/Details/5
         public async Task<ActionResult> Details(string ClientId)
         {
@@ -243,11 +227,11 @@ namespace iCelerium.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Super Admin")]
-        public async Task<ActionResult> Edit([Bind(Include = "ClientTel,Mise,Name,Sexe")] EditClientsViewModel client)
+        public async Task<ActionResult> Edit([Bind(Include = "ClientTel,Mise,Name,Sexe,ClientId")] EditClientsViewModel client)
         {
             if (this.ModelState.IsValid)
             {
-                Client cli = await db.Clients.Where(c => c.Name.Equals(client.Name)).FirstAsync();
+                Client cli = await db.Clients.Where(c => c.ClientId.Equals(client.ClientId)).FirstAsync();
                 cli.ClientTel = client.ClientTel;
                 cli.Mise = client.Mise;
                 cli.Name = client.Name;
@@ -283,57 +267,39 @@ namespace iCelerium.Controllers
         //    await db.SaveChangesAsync();
         //    return RedirectToAction("Index");
         //}
-        public ActionResult Report(string id)
+       
+        public ActionResult IndexOne()
         {
-            LocalReport lr = new LocalReport();
-            string path = Path.Combine(Server.MapPath("~/Reports"), "DailyValidadion.rdlc");
-            if (System.IO.File.Exists(path))
+            return View();
+        }
+        public class jess
+        {
+            public List<ClientsViewModel> data { get; set; }
+        }
+        public async Task<JsonResult> GetData()
+        {
+            
+            IEnumerable<Client> clientList = await this.db.Clients.ToListAsync();
+            List<ClientsViewModel> model = new List<ClientsViewModel>();
+            foreach (Client cmx in clientList)
             {
-                lr.ReportPath = path;
+                model.Add(new ClientsViewModel
+                {
+                    ClientId = cmx.ClientId,
+                    ClientTel = cmx.ClientTel,
+                    Mise = (double)cmx.Mise,
+                    Name = cmx.Name,
+                    Sexe = cmx.Sexe,
+                    Solde = (double)cmx.Solde,
+                    link = string.Format("<a href='/Clients/Details?ClientId={0}'> <i class='fa fa-info fa-fw fa-2x'></i></a>" +
+                                         "<a href='/Clients/Edit?ClientId={0}'> <i class='fa fa-edit fa-fw fa-2x'></i></a>"+
+                                         "<a href='/Clients/Transaction?ClientId={0}'> <i class='fa fa-bolt fa-fw fa-2x'></i></a>"
+                                        ,cmx.ClientId)
+                });
             }
-            else
-            {
-                return View("Index");
-            }
-            List<vTransaction> cm = new List<vTransaction>();
-            using (SMSServersEntities dc = new SMSServersEntities())
-            {
-                cm = dc.vTransactions.ToList();
-            }
-            ReportDataSource rd = new ReportDataSource("DataSet2", cm);
-            lr.DataSources.Add(rd);
-            string reportType = id;
-            string mimeType;
-            string encoding;
-            string fileNameExtension;
-
-            string deviceInfo =
-
-            "<DeviceInfo>" +
-            "  <OutputFormat>" + id + "</OutputFormat>" +
-            "  <PageWidth>8.5in</PageWidth>" +
-            "  <PageHeight>11in</PageHeight>" +
-            "  <MarginTop>0.5in</MarginTop>" +
-            "  <MarginLeft>1in</MarginLeft>" +
-            "  <MarginRight>1in</MarginRight>" +
-            "  <MarginBottom>0.5in</MarginBottom>" +
-            "</DeviceInfo>";
-
-            Warning[] warnings;
-            string[] streams;
-            byte[] renderedBytes;
-
-            renderedBytes = lr.Render(
-                reportType,
-                deviceInfo,
-                out mimeType,
-                out encoding,
-                out fileNameExtension,
-                out streams,
-                out warnings);
-
-
-            return File(renderedBytes, mimeType);
+            jess jess = new jess();
+            jess.data = model;
+            return Json(jess, JsonRequestBehavior.AllowGet);
         }
         protected override void Dispose(bool disposing)
         {

@@ -28,9 +28,34 @@ namespace iCelerium.Controllers
                 Chart2 = this.PieData(),
                 Chart3 = this.TransDaily()
             };
+            Widget wi = GetTodayMembers();
+
+            ViewBag.mTotal = wi.mTotal;
+            ViewBag.mPerc=wi.mPerc;
+            ViewBag.mUsers = wi.mUsers;
+            ViewBag.mNewClient = wi.mNewClient;
+            
             return this.View(vm);
         }
+        public Widget GetTodayMembers()
+        {
+            SMSServersEntities tp = new SMSServersEntities();
+            string tDate = DateTime.Today.ToString("MM/dd/yyyy");
+            var tran = tp.spTransDayColPay(tDate, 1);
+            DateTime baselineDate = DateTime.Now;
+            int trans = tp.TTransactions.Where(t => t.DateOperation.Day == baselineDate.Day && t.DateOperation.Month == baselineDate.Month && t.DateOperation.Year == baselineDate.Year).Select(c => c.ClientId).Distinct().Count();
+            int ctotal = tp.Clients.Count();
+            double per= (trans * 100.00)/ctotal ;
 
+            Widget widget = new Widget();
+            widget.mTotal = (tran.Sum(t => t.Total) ?? 0).ToString("C");
+            widget.mPerc = Math.Round(per, 2).ToString();
+            widget.mUsers = tp.Clients.Count().ToString();
+            widget.mNewClient = String.Format("{0}", tp.TTransactions.Where(t => t.DateOperation.Day == baselineDate.Day && t.DateOperation.Month == baselineDate.Month && t.DateOperation.Year == baselineDate.Year && t.Description == 1).Count().ToString());
+            
+
+            return widget;
+        }
         public ActionResult Reports(string reportModel)
         {
             List<SelectListItem> items = new List<SelectListItem>();
@@ -53,7 +78,7 @@ namespace iCelerium.Controllers
             SMSServersEntities tp = new SMSServersEntities();
             string tDate = DateTime.Today.ToString("MM/dd/yyyy");
 
-            var tran = tp.spTransDayColPay(tDate, 1);
+            var tran = tp.spTransDayColPay(tDate,1);
 
             foreach (var iTra in tran.ToList())
             {

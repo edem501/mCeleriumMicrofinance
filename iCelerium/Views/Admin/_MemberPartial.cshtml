@@ -1,22 +1,54 @@
-﻿
-@model List<iCelerium.Models.BodyClasses.ClientsList>
-
-<table>
-    <thead>
-        <tr>
-            <td>Nom &Aacute; Prenoms</td>
-            <td>Transferer</td>
-            
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+﻿@model List<iCelerium.Models.BodyClasses.ClientsList>
+@using (Html.BeginForm("_MemberPartial", "Admin", FormMethod.Post, new { encType = "multipart/form-data" }))
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.FullName)</td>
-                <td>@Html.DisplayFor(modelItem => item.selected)</td>
-            </tr>
-        }
-       
-    </tbody>
-</table>
+<div class="col-md-12">
+    <div class="panel panel-success">
+        <table class="table table-condensed table-striped dataTable DataTable">
+            <thead>
+                <tr>
+                    
+                    <th>Nom & Prenoms</th>
+                    <th>Identifiant</th>
+                    <th><input type='checkbox' id='All' /> Transferer</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ClientID)</td>
+                        <td>@Html.CheckBoxFor(modelItem => item.selected)</td>
+                        
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    @if (Model.Count() > 0)
+    {
+    <input type="submit" value="Transferer Membre(s)" class="btn btn-success" />
+    }
+</div>
+}
+<script type="text/javascript" language="javascript">
+    
+                $('.DataTable').DataTable(
+                         {
+                             "language": {
+                                 "lengthMenu": "Projection _MENU_ records par page",
+                                 "zeroRecords": "Pas de donnee - Desole!!",
+                                 "info": "Projection page _PAGE_ de _PAGES_",
+                                 "infoEmpty": "Pas de donne a afficher. Desole!!",
+                                 "infoFiltered": "(filtre de _MAX_ total records)",
+                                 "search": "<i class='fa fa-search'></i>",
+                                 "searchPlaceholder": "Filtrer"
+                             }
+                         });
+                $("#All").click(function () {
+                    $('.DataTable tbody input[type="checkbox"]').prop('checked', this.checked);
+                });
+
+</script>

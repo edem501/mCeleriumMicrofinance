@@ -18,7 +18,14 @@ namespace iCelerium.Controllers
         private readonly SMSServersEntities db = new SMSServersEntities();
         private readonly Cryptographer.CryptorEngine crypto = new Cryptographer.CryptorEngine();
 
-
+        public class jess
+        {
+            public List<AgentListView> data { get; set; }
+        }
+        public class jess1
+        {
+            public List<AgentClientsModel> data { get; set; }
+        }
         public async Task<ActionResult> AgentAssign(string agentID)
         {
             Commerciaux commerciaux =await db.Commerciauxes.Where(c => c.AgentId == agentID).FirstOrDefaultAsync();
@@ -35,53 +42,82 @@ namespace iCelerium.Controllers
                     lstClient.Add( await db.Clients.Where(c => c.ClientId == agAss.ClientId).FirstOrDefaultAsync());
                 }
             }
-
-            return View(new AgentClientsModel { AgentName=commerciaux.AgentName,Membres = lstClient});
+            ViewBag.Nom = commerciaux.AgentName;
+            ViewBag.tCount = lstClient.Count();
+            ViewBag.AgentID=commerciaux.AgentId;
+            return View();
 
         }
-
-        // GET: /Agents/
-        public async Task<ActionResult> Index(string currentFilter, string searchString, int? page)
+        public async Task<JsonResult> GetAgentAssign(string agentID)
         {
-            if (searchString != null)
+            Commerciaux commerciaux = await db.Commerciauxes.Where(c => c.AgentId == agentID).FirstOrDefaultAsync();
+           
+            List<Client> lstClient = new List<Client>();
+            List<AgentAssignClient> lstAssigned = await db.AgentAssignClients.Where(c => c.AgentId == agentID).ToListAsync();
+            if (lstAssigned != null)
             {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            this.ViewBag.CurrentFilter = searchString;
-            IEnumerable<Commerciaux> agentList;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                agentList = await this.db.Commerciauxes.Where(c => c.AgentName.ToUpper().Contains(searchString.ToUpper())).ToListAsync();
-            }
-            else
-            {
-                agentList = await this.db.Commerciauxes.ToListAsync();
-            }
-
-            List<AgentListView> model = new List<AgentListView>();
-            foreach (Commerciaux cmx in agentList)
-            {
-                model.Add(new AgentListView
+                foreach (AgentAssignClient agAss in lstAssigned)
                 {
-                    AgentActif = cmx.AgentActif,
-                    AgentId = cmx.AgentId,
-                    AgentName = cmx.AgentName,
-                    AgentTel = cmx.AgentTel,
-                    Id = cmx.Id
+                    lstClient.Add(await db.Clients.Where(c => c.ClientId == agAss.ClientId).FirstOrDefaultAsync());
+                }
+            }
+
+            List<AgentClientsModel> agtcl = new List<AgentClientsModel>();
+            foreach (Client cl in lstClient)
+            {
+                agtcl.Add(new AgentClientsModel { 
+                NameID=String.Format("{0}<b>({1})</b>",cl.Name,cl.ClientId),
+                Mise=cl.Mise,
+                Solde=cl.Solde,
+                link = string.Format("<a href='/Clients/Transaction?ClientId={0}'> <i class='fa fa-info-circle fa-fw fa-2x'></i></a>"
+                                        , cl.ClientId)
                 });
             }
 
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return this.View(model.ToPagedList(pageNumber, pageSize));
+            jess1 jess = new jess1();
+            jess.data = agtcl;
+            return Json(jess, JsonRequestBehavior.AllowGet);
+           
         }
 
+        // GET: /Agents/
+        public async Task<ActionResult> Index()
+        {
+            return View();
+        }
+        public async Task<JsonResult> GetIndex()
+        {
+
+            IEnumerable<Commerciaux> clientList = await this.db.Commerciauxes.ToListAsync();
+            List<AgentListView> model = new List<AgentListView>();
+            String Checked;
+            foreach (Commerciaux cmx in clientList)
+            {
+                if (cmx.AgentActif)
+                {
+                    Checked = "<input type='checkbox' checked disabled/> ";
+                }
+                else
+                {
+                    Checked = "<input type='checkbox' disabled/> ";
+                }
+                model.Add(new AgentListView
+                {
+                   
+                    AgentActif = String.Format(Checked, cmx.AgentActif),
+                    AgentId = cmx.AgentId,
+                    AgentName = cmx.AgentName,
+                    AgentTel = cmx.AgentTel,
+                    Id = cmx.Id,
+                    link = string.Format("<a href='/Agents/AgentAssign?agentID={0}'> <i class='fa fa-info-circle fa-fw fa-2x'></i></a>" +
+                                         "<a href='/Agents/Edit/{1}'> <i class='fa fa-edit fa-fw fa-2x'></i></a>" 
+                                        , cmx.AgentId,cmx.Id)
+                });
+            }
+            jess jess = new jess();
+            jess.data = model;
+            return Json(jess, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Test()
         {
             return this.View();
@@ -295,6 +331,10 @@ namespace iCelerium.Controllers
                 return false;
             }
         }
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {

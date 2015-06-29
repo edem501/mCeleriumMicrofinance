@@ -5,7 +5,7 @@
 <html>
 <head>
 
-    
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Celerium</title>
@@ -14,8 +14,8 @@
     @Scripts.Render("~/bundles/jquery")
 
     @*<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>*@
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>*@
     <link rel="icon" href="favicon.ico">
     <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")"></script>
@@ -27,9 +27,13 @@
     <script src="~/Scripts/jquery-ui.unobtrusive-2.2.0.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/customScript.js"></script>
+    <script src="~/Scripts/json2.js"></script>
+
+
+
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <link rel="stylesheet" href="~/font-awesome/css/font-awesome.min.css">
-    
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -49,83 +53,88 @@
                     @if (HttpContext.Current.User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink(@iCelerium.Views.Strings.Home.ToUpper(), "Index", "Home", null, null)</li>
-                    <li>@Html.ActionLink(@iCelerium.Views.Strings.Reports.ToUpper(), "Index", "Reports")</li>
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">TIM-AGRO<span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-            <li class="dropdown-backdrop">
-                <a>@iCelerium.Views.Strings.Agents</a>
+                        <li>@Html.ActionLink(@iCelerium.Views.Strings.Reports.ToUpper(), "Index", "Reports")</li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">TIM-AGRO<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-backdrop">
+                                    <a>@iCelerium.Views.Strings.Agents</a>
 
-            </li>
-            <li>@Html.ActionLink("Livraison Journaliere", "DailyDelivery", "Credits", null, null)</li>
-            <li class="divider"></li>
-            <li><a href='@Url.Action("ListOfCredit", "Credits")'>List Membres Sous Credit</a></li>
-            <li class="divider"></li>
-            <li><a href='@Url.Action("ListOfSavings", "Credits")'>List Membres Sous Epargne</a></li>
-        </ul>
-    </li>
-    @*<li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">IMPORTER<span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-            <li class="dropdown-backdrop">
-                <a>@iCelerium.Views.Strings.Agents</a>
+                                </li>
+                                <li>@Html.ActionLink("Livraison Journaliere", "DailyDelivery", "Credits", null, null)</li>
+                                <li class="divider"></li>
+                                <li><a href='@Url.Action("ListOfCredit", "Credits")'>Liste Membres Sous Credit</a></li>
+                                <li class="divider"></li>
+                                <li><a href='@Url.Action("ListOfSavings", "Credits")'>Liste Membres Sous Epargne</a></li>
+                                <li class="divider"></li>
+                                <li><a href='@Url.Action("Recouvrements", "Credits")'>Rapport Des Recouvrements</a></li>
+                                <li class="divider"></li>
+                                <li><a href='@Url.Action("Collettes", "Credits")'>Rapport Des Epargnes</a></li>
+                            </ul>
+                        </li>
+                        @*<li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">IMPORTER<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-backdrop">
+                                        <a>@iCelerium.Views.Strings.Agents</a>
 
-            </li>
-            <li>@Html.ActionLink("Importer Agent", "IAgent", "Import", null, null)</li>
-            <li class="divider"></li>
-            <li><a href='@Url.Action("IMember", "Import")'>Importer Membre</a></li>
+                                    </li>
+                                    <li>@Html.ActionLink("Importer Agent", "IAgent", "Import", null, null)</li>
+                                    <li class="divider"></li>
+                                    <li><a href='@Url.Action("IMember", "Import")'>Importer Membre</a></li>
 
-        </ul>
-    </li>*@
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">ADMINISTRATION<span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-            <li class="dropdown-backdrop">
-                <a>@iCelerium.Views.Strings.Agents</a>
-                
-            </li>
-            <li>@Html.ActionLink("Creer compte", "Register", "Account", null, null)</li>
-            <li class="divider"></li>
-            <li><a href='@Url.Action("AccountsList", "Account")'>Modifier compte</a></li>
-            <li class="divider"></li>
-            <li><a href='@Url.Action("Roles", "Account")'>Roles</a></li>
-            <li class="divider"></li>
-            <li><a href='@Url.Action("index", "Zones")'>Zones</a></li>
-            <li class="divider"></li>
-            <li><a href='@Url.Action("AuditTrail", "Settings")'>System Audit</a></li>
-            @{
-                SMSServersEntities sm = new SMSServersEntities();
+                                </ul>
+                            </li>*@
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">ADMINISTRATION<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-backdrop">
+                                    <a>@iCelerium.Views.Strings.Agents</a>
 
-                var manual = sm.Settings.FirstOrDefault();
+                                </li>
+                                <li>@Html.ActionLink("Creer compte", "Register", "Account", null, null)</li>
+                                <li class="divider"></li>
+                                <li><a href='@Url.Action("AccountsList", "Account")'>Modifier compte</a></li>
+                                <li class="divider"></li>
+                                <li><a href='@Url.Action("Roles", "Account")'>Roles</a></li>
+                                <li class="divider"></li>
+                                <li><a href='@Url.Action("index", "Zones")'>Zones</a></li>
+                                <li class="divider"></li>
+                                <li><a href='@Url.Action("AuditTrail", "Settings")'>System Audit</a></li>
+                                @{
+                        SMSServersEntities sm = new SMSServersEntities();
 
-               if(manual.HasManualEntry)
-               {
-                <li class="divider"></li>
-                <li><a href=@Url.Action("Manual","Posting")>Pointage Manuel </a></li>
-               }
+                        var manual = sm.Settings.FirstOrDefault();
 
-            }
-
-            <li class="divider"></li>
-            <li><a href=@Url.Action("Index","Posting")>Validation</a></li>
-        </ul>
-    </li>
-@*<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Zones", "Index", "Zones", null, null)</li>
+                        if (manual.HasManualEntry)
+                        {
                             <li class="divider"></li>
-                            <li>@Html.ActionLink("Creer compte", "Register", "Account", null, null)</li>
-                            <li class="divider"></li>
-                            <li><a href='@Url.Action("AccountsList", "Account")'>Modifier compte</a></li>
-                            <li class="divider"></li>
-                            <li><a href='@Url.Action("Roles", "Account")'>Roles</a></li>
-                            <li class="divider"></li>
-                            <li><a href='@Url.Action("AuditTrail", "Settings")'>System Audit</a></li>
-                            <li class="divider"></li>
-                            <li><a href=@Url.Action("Index","Posting")>Validation</a></li>
-                        </ul>
-                     </li>*@
+                                    <li><a href=@Url.Action("Manual","Posting")>Pointage Manuel </a></li>
+                        }
+
+                                }
+                                @*<li class="divider"></li>
+                                    <li><a href=@Url.Action("TransferClient", "Admin")>Transferer Membres</a></li>*@
+                                <li class="divider"></li>
+                                <li><a href=@Url.Action("Index","Posting")>Validation</a></li>
+                            </ul>
+                        </li>
+                        @*<li class="dropdown">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></a>
+                               <ul class="dropdown-menu" role="menu">
+                                   <li>@Html.ActionLink("Zones", "Index", "Zones", null, null)</li>
+                                   <li class="divider"></li>
+                                   <li>@Html.ActionLink("Creer compte", "Register", "Account", null, null)</li>
+                                   <li class="divider"></li>
+                                   <li><a href='@Url.Action("AccountsList", "Account")'>Modifier compte</a></li>
+                                   <li class="divider"></li>
+                                   <li><a href='@Url.Action("Roles", "Account")'>Roles</a></li>
+                                   <li class="divider"></li>
+                                   <li><a href='@Url.Action("AuditTrail", "Settings")'>System Audit</a></li>
+                                   <li class="divider"></li>
+                                   <li><a href=@Url.Action("Index","Posting")>Validation</a></li>
+                               </ul>
+                            </li>*@
 
                     }
 
@@ -137,37 +146,37 @@
     <div class="container body-content">
         <div class="jumbotron">
             <h2>@ViewBag.Title.</h2>
-            <h4>@ViewBag.SubTitle</h4> 
+            <h4>@ViewBag.SubTitle</h4>
         </div>
 
         <div class="row">
-@if (HttpContext.Current.User.Identity.IsAuthenticated)
-{
-            <div class="col-sm-2">
-                <!-- left -->
-                <h3><i class="fa  fa-briefcase"></i> @iCelerium.Views.Strings.Tools</h3>
-                <hr>
+            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                <div class="col-sm-2">
+                    <!-- left -->
+                    <h3><i class="fa  fa-briefcase"></i> @iCelerium.Views.Strings.Tools</h3>
+                    <hr>
 
-                <ul class="nav nav-stacked">
-               
-                    <li><a href='@Url.Action("Index", "Home")'><i class="fa fa-home"></i>@iCelerium.Views.Strings.Home </a></li>
-                    <li><a href='@Url.Action("Index", "Agents")'><i class="fa fa-users"></i>@iCelerium.Views.Strings.Agents </a></li>
-                    <li><a href='@Url.Action("Index", "Clients")'><i class="fa fa-users"></i>@iCelerium.Views.Strings.Members </a></li>
-                    <li><a href='@Url.Action("Index", "Transactions")'><i class="fa fa-sort-amount-desc"></i>Transactions </a></li>
-                    <li><a href='@Url.Action("Index", "Reports")'><i class="fa fa-stack-exchange"></i>@iCelerium.Views.Strings.Reports </a></li>
-                    <li><a href='@Url.Action("ValidationsList", "Posting")'><i class="fa fa-tasks"></i>@iCelerium.Views.Strings.ValidationSum</a></li>
-                    
-                    <li><a href='@Url.Action("Manage", "Account")'><i class="fa fa-user"></i>Changer mot de passe </a></li>
-                   
-                </ul>
+                    <ul class="nav nav-stacked">
 
-            </div>
-}
+                        <li><a href='@Url.Action("Index", "Home")'><i class="fa fa-home fa-2x"></i>@iCelerium.Views.Strings.Home.ToUpper() </a></li>
+                        <li><a href='@Url.Action("Index", "Agents")'><i class="fa fa-users fa-2x"></i>@*@iCelerium.Views.Strings.Agents.ToUpper()*@ COLLECTEURS </a></li>
+                        <li><a href='@Url.Action("Index", "Clients")'><i class="fa fa-users fa-2x"></i>@iCelerium.Views.Strings.Members.ToUpper() </a></li>
+                        <li><a href='@Url.Action("Index", "Transactions")'><i class="fa fa-sort-amount-desc fa-2x"></i>TRANSACTIONS </a></li>
+                        <li><a href='@Url.Action("Index", "Reports")'><i class="fa fa-stack-exchange fa-2x"></i>@iCelerium.Views.Strings.Reports.ToUpper() </a></li>
+                        <li><a href='@Url.Action("ValidationsList", "Posting")'><i class="fa fa-tasks fa-2x"></i>@iCelerium.Views.Strings.ValidationSum.ToUpper()</a></li>
+
+                        <li><a href='@Url.Action("Manage", "Account")'><i class="fa fa-user fa-2x"></i>CHANGER MOT DE PASSE</a></li>
+
+                    </ul>
+
+                </div>
+            }
             <div class="col-sm-10">
                 @RenderBody()
             </div>
         </div>
-      
+
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Albatros Sarl </p>
@@ -185,6 +194,13 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+    <script src="~/Scripts/DataTable/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTable/DataTableBootstrap.js"></script>
+
+
+
+    <link href="~/Content/DataTable/DataTableBootstrap.css" rel="stylesheet" />
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,51 +1,93 @@
-﻿
+﻿@model List<iCelerium.Models.BodyClasses.ClientsList>
 @{
-    ViewBag.Title = "TransferClient";
+    ViewBag.Title = "Transfere de membre";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<script type="text/javascript" language="javascript">
-    function ClearResults() {
-        $("#AgentPartial").empty;
-    }
-</script>
-<div class="row">
-    <h3><i class="fa fa-users"></i>Transfer de membre</h3>
-    <hr />
-@using (Ajax.BeginForm("_MemberPartial", "Admin", new AjaxOptions
-{
-    HttpMethod = "GET",
-    UpdateTargetId = "AccountPartial",
-    InsertionMode = InsertionMode.Replace,
-    LoadingElementId = "Spinner",
-    OnBegin = "ClearResults"
 
-}))
-        {
-    <div class="row">
+<div class="row">
+    <h3><i class="fa fa-users"></i>Transfere de membre</h3>
+    <hr />
+    @using (Html.BeginForm("TransferClient", "Admin",new { AgentID = ViewBag.AgentID , Id = ViewBag.Id}, FormMethod.Get))
+    {
+
+        <div class="col-md-4"></div>
         <div class="col-md-4">
             <div class="form-group">
 
                 <div class="input-group ">
-                    <span class="input-group-addon"><i class="fa fa-user bigger-110"></i></span>
-                    @Html.DropDownList("Comm", null, "Transaferer de", new { @class = "form-control dropdown" })
-                    <input type="submit" value="Go" class="btn btn-sm" />
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    @Html.DropDownList("Id", null, "Transaferer de", new { @class = "form-control dropdown" })
                 </div>
+                <div class="input-group ">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    @Html.DropDownList("AgentID", null, "Vers", new { @class = "form-control dropdown" })
+                </div>
+                <input type="submit" value="Afficher" class="btn btn-warning col-md-offset-9" />
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4"></div>
+    }
 
+    <hr />
+</div>
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-success">
+            @using (Html.BeginForm("TransferClient", "Admin", FormMethod.Post, new { encType = "multipart/form-data" }))
+            {
+                <table class="table table-condensed table-striped dataTable DataTable">
+                    <thead>
+                        <tr>
+
+                            <th>Nom & Prenoms @Html.DisplayNameFor(model=>model[1].FullName)</th>
+                            <th>Identifiant @Html.DisplayNameFor(model=>model[1].ClientID)</th>
+                            <th><input type='checkbox' id='All' /> Transferer @Html.DisplayNameFor(model => model[1].selected)</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() > 0)
+                        {
+                            for (int i = 0; i < Model.Count(); i++)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => modelItem[i].FullName)</td>
+                                    <td>@Html.DisplayFor(modelItem => modelItem[i].ClientID)</td>
+                                    <td>@Html.CheckBoxFor(modelItem => modelItem[i].selected)</td>
+
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+                if (Model.Count() > 0)
+                {
+                    <input type="submit" value="Transferer Membre(s)" class="btn btn-success" />
+                }
+            }
         </div>
     </div>
-        }
-<div id="Spinner" style="display:none;">
-    <img src="~/Images/spiffygif.gif" />
-</div>
-
-<div id="AccountPartial" class="row">
 
 </div>
-    
-</div>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $('.DataTable').DataTable(
+                             {
+                                 "language": {
+                                     "lengthMenu": "Projection _MENU_ records par page",
+                                     "zeroRecords": "Pas de donnee - Desole!!",
+                                     "info": "Projection page _PAGE_ de _PAGES_",
+                                     "infoEmpty": "Pas de donne a afficher. Desole!!",
+                                     "infoFiltered": "(filtre de _MAX_ total records)",
+                                     "search": "<i class='fa fa-search'></i>",
+                                     "searchPlaceholder": "Filtrer"
+                                 }
+                             });
+        $("#All").click(function () {
+            $('.DataTable tbody input[type="checkbox"]').prop('checked', this.checked);
+        });
+    });
 
+</script>

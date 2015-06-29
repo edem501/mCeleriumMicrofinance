@@ -8,7 +8,7 @@ namespace iCelerium.Models.BodyClasses
 {
     public class dailyDeliveryViewModel
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public bool Enabled { get; set; }
         [Display(Name="Nom Membre")]
         public string ClientName { get; set; }

@@ -55,19 +55,20 @@ namespace iCelerium.Controllers
             {
                 TTransaction transaction = new TTransaction();
                 Client client = db.Clients.Where(c => c.ClientId.Equals(model.clientID)).FirstOrDefault();
-                db.TTransactions.Add(new TTransaction
-                {
-                    AgentId=model.AgentID,
-                    ClientId=model.clientID,
-                    Credit=model.Amount,
-                    DateOperation=DateTime.Now,
-                    Debit=0,
-                    Description=0,
-                    Posted=false,
-                    SoldeFermeture=client.Solde.Value + model.Amount,
-                    SoldeOuverture=client.Solde.Value
+
+                    transaction.AgentId = model.AgentID;
+                    transaction.ClientId = model.clientID;
+                    transaction.Credit = model.Amount;
+                    transaction.DateOperation = DateTime.Now;
+                    transaction.Debit = 0;
+                    transaction.Description = 0;
+                    transaction.Posted = false;
+                    transaction.SoldeFermeture = client.Solde.Value + model.Amount;
+                    transaction.SoldeOuverture = client.Solde.Value;
                   
-                });
+                
+                db.TTransactions.Add(transaction);
+                client.Solde=transaction.SoldeFermeture;
                 db.SaveChanges();
                 var lstAgent = db.Commerciauxes.ToList();
                 List<SelectListItem> AgentsList = new List<SelectListItem>();
@@ -78,11 +79,12 @@ namespace iCelerium.Controllers
                 }
                 ViewBag.AgentsList = AgentsList;
                 ViewBag.lstClient = lstClient;
-                return View();
+                return RedirectToAction("Manual");
             }
             else
             {
-                return RedirectToAction("Home");
+                
+                return RedirectToAction("Index","Home");
             }
             
         }

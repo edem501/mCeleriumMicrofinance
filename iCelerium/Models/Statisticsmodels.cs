@@ -45,6 +45,14 @@ namespace iCelerium.Models
         public Highcharts Chart3 { get; set; }
     }
 
+    public class Widget
+    {
+        public string mTotal { get; set; }
+        public string mPerc { get; set; }
+        public string mNewClient { get; set; }
+        public string mUsers { get; set; }
+    }
+
     public class PostingViewModel
     {
         public string AgentId { get; set; }

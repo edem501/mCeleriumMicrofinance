@@ -21,6 +21,8 @@ namespace iCelerium.Models
         public string Name { get; set; }
         [Display(Name = "Sex", ResourceType = typeof(iCelerium.Views.Strings))]
         public string Sexe { get; set; }
+
+        public string link { get; set; }
     }
 
     public class ClientsViewModelCredit
